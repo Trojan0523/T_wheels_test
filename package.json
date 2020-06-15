@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Trojan0523/T_wheels_test/issues"
   },
-  "homepage": "https://github.com/Trojan0523/T_wheels_test#readme"
+  "homepage": "https://github.com/Trojan0523/T_wheels_test#readme",
+  "dependencies": {
+    "vue": "^2.6.11"
+  }
 }
