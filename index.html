@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -23,6 +23,11 @@
             --border-color-hover: #666;
             --button-active-bg: #eee;
         }
+
+        .icon {
+            width: 1em;
+            height: 1em;
+        }
     </style>
     <style>
         #app {
@@ -36,8 +41,17 @@
 </head>
 <body>
 <div id="app">
-    <g-button></g-button>
+    <g-button icon="settings">
+        按钮
+    </g-button>
+    <g-button icon="settings" icon-position="right">
+        按钮
+    </g-button>
+    <g-button>
+        按钮
+    </g-button>
 </div>
 <script src="src/app.js"></script>
+<script src="//at.alicdn.com/t/font_1887693_ndfkqfsp0eg.js"></script>
 </body>
 </html>
