@@ -32,12 +32,8 @@
 
 <style lang="scss">
     @keyframes spin {
-        0%{
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
+        0%{transform: rotate(0deg);}
+        100% {transform: rotate(360deg);}
     }
     .g-button {
         font-size: var(--font-size);
@@ -60,8 +56,6 @@
             > .content {order: 1;}
             > .icon {order: 2;margin-left: .1em;margin-right: 0;}
         }
-        .loading {
-            animation: spin 2s infinite linear;
-        }
+        .loading {animation: spin 2s infinite linear;}
     }
 </style>
