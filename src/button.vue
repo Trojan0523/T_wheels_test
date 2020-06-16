@@ -1,6 +1,6 @@
 <template>
         <button class="g-button" :class="{[`icon-${iconPosition}`]: true}">
-            <t-icon v-if="icon" :name="icon"></t-icon>
+            <t-icon class="icon" v-if="icon" :name="icon"></t-icon>
             <div class="content">
                 <slot></slot>
             </div>
@@ -8,7 +8,6 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
 
   export default {
     // props:['icon', 'iconPosition']
