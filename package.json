@@ -22,5 +22,8 @@
   "homepage": "https://github.com/Trojan0523/T_wheels_test#readme",
   "dependencies": {
     "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
   }
 }
