@@ -1,7 +1,7 @@
 {
-  "name": "t_wheels",
+  "name": "trojan-test-1-1",
   "version": "0.0.1",
-  "description": "这是一个UI框架",
+  "description": "这是一个Vue的UI框架",
   "main": "index.js",
   "scripts": {
     "dev-test": "parcel watch test/* --no-cache & karma start",
