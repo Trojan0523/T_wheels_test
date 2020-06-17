@@ -3,17 +3,58 @@
 [![Build Status](https://travis-ci.org/Trojan0523/T_wheels_test.svg?branch=master)](https://travis-ci.org/Trojan0523/T_wheels_test)
 
 ## 介绍
-
+这是我在学习Vue过程中做的一个 UI 框架， 希望对你有用。
 ## 开始使用
 
-1. 安装
-使用本框架前, 请在 CSS中开启border-box
+1. 添加CSS样式
 
-```
-* {
-    box-sizing: border-box;
-}
-```
+    使用本框架前, 请在 CSS中开启border-box
+    
+    ```
+    *,*::before, *::after {box-sizing: border-box;}
+    ```
+    IE 8 及以上浏览齐都支持此样式。 
+    
+    你还需要设置默认颜色等变量 (后续会改为SCSS变量)
+    
+    ```
+    html 
+            {
+            --button-height: 32px;
+            --font-size: 14px;
+            --button-bg: white;
+            --border-radius: 4px;
+            --color: #333;
+            --border-color: #999;
+            --border-color-hover: #666;
+            --button-active-bg: #eee;
+            }
+    
+    ```
+    IE 15 及以上浏览齐都支持此样式。 
+
+2. 安装T_Wheels
+    ```
+   npm i --save trojan-test-1-1
+   ```
+3. 引入trojan-test-1-1
+    ```
+    import {Button, ButtonGroup, Icon} from 'trojan-test-1-1'
+    import 'trojan-test-1-1/dist/index.css'
+   
+    export default {
+        name: 'app',
+        components: {
+            HelloWorld,
+            'g-button': Button,
+            't-icon': Icon
+   }
+   }
+    ```
+4. 引入 svg symbols
+    ```
+    <script src="//at.alicdn.com/t/font_1887693_goykxjenwtf.js"></script>
+    ```
 
 ## 文档
 
