@@ -21,7 +21,7 @@ chai.use(spies)
 const expect = chai.expect;
 // 单元测试
 /*
-*   当前测试icon:setting路径是否正确
+*   当前测试按钮是否含有icon
 * */
 {
     const Constructor = Vue.extend(Button)

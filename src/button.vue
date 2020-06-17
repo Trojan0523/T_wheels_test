@@ -9,10 +9,12 @@
         </button>
 </template>
 
-<script lang="ts">
-
+<script>
+    import Icon from './icon'
   export default {
-    // props:['icon', 'iconPosition']
+    components: {
+      't-icon' : Icon
+    },
     props: {
       icon:{},
       loading:{
