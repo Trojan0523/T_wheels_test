@@ -39,6 +39,10 @@
 <body>
 <div id="app">
     <div class="box">
+        <t-input value="hi" v-model="message"></t-input>
+        <p>{{message}}</p>
+    </div>
+    <div class="box">
         <t-input value="张三" disabled></t-input>
         <t-input value="李四" readonly></t-input>
         <t-input value="王五"></t-input>
