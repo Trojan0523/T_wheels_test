@@ -34,10 +34,32 @@
         .box {
              margin: 20px;
         }
+        /*.col {*/
+        /*     height: 100px;*/
+        /*     background: gray;*/
+        /*     width: 50%;*/
+        /*     border: 1px solid red;*/
+        /* }*/
+
+        /*.row {*/
+        /*    display: flex;*/
+        /*}*/
+        /*.col[data-span="2"] {*/
+        /*    width: 8.333366%;*/
+        /*}*/
+        /*.col[data-span="22"] {*/
+        /*    width: 91.666667%;*/
+        /*}*/
     </style>
 </head>
 <body>
 <div id="app">
+    <t-row>
+        <t-col></t-col>
+        <t-col></t-col>
+        <t-col></t-col>
+    </t-row>
+    <hr />
     <div class="box">
         <t-input value="hi" v-model="message"></t-input>
         <p>{{message}}</p>
