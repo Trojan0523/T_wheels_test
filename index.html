@@ -34,46 +34,41 @@
         .box {
              margin: 20px;
         }
-        /*.col {*/
-        /*     height: 100px;*/
-        /*     background: gray;*/
-        /*     width: 50%;*/
-        /*     border: 1px solid red;*/
-        /* }*/
-
-        /*.row {*/
-        /*    display: flex;*/
-        /*}*/
-        /*.col[data-span="2"] {*/
-        /*    width: 8.333366%;*/
-        /*}*/
-        /*.col[data-span="22"] {*/
-        /*    width: 91.666667%;*/
-        /*}*/
     </style>
 </head>
 <body>
 <div id="app">
-    <t-row>
-        <t-col></t-col>
-        <t-col></t-col>
+    <div>
+        <t-row>
+            <t-col></t-col>
+            <t-col></t-col>
+        </t-row>
+    </div>
+<div style="border: 1px solid black;">
+    <t-row gutter="20">
+        <t-col gutter="20">1</t-col>
+        <t-col gutter="20">1</t-col>
     </t-row>
-    <t-row>
-        <t-col></t-col>
-        <t-col></t-col>
-        <t-col></t-col>
+    <t-row gutter="30">
+        <t-col>1</t-col>
+        <t-col>1</t-col>
+        <t-col>1</t-col>
     </t-row>
-    <t-row>
-        <t-col span="2"></t-col>
-        <t-col span="11"></t-col>
-        <t-col span="4"></t-col>
-        <t-col span="4"></t-col>
-        <t-col span="3"></t-col>
-    </t-row>
-    <t-row>
+    <t-row gutter="20">
+        <t-col span="2">1</t-col>
+        <t-col span="11">1</t-col>
         <t-col span="4">1</t-col>
-        <t-col span="22">11</t-col>
+        <t-col span="7" offset="1">1</t-col>
     </t-row>
+    <t-row gutter="20">
+        <t-col span="4">1</t-col>
+        <t-col span="18">11</t-col>
+    </t-row>
+</div>
+
+
+
+
     <hr />
     <div class="box">
         <t-input value="hi" v-model="message"></t-input>
