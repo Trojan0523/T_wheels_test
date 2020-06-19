@@ -1,12 +1,17 @@
 <template>
-    <div class="col">
+    <div class="col" :class="[`col-${span}`]">
         <slot></slot>
     </div>
 </template>
 
 <script>
     export default {
-
+        name: 'TCol',
+        props: {
+            span: {
+                type: [Number, String]
+            }
+        }
     }
 </script>
 
@@ -16,13 +21,11 @@
         background: gray;
         width: 50%;
         border: 1px solid red;
-    }
-
-    $class-prefix: col-;
-    @for $n from 1 through 24 {
-    /* for each &col_#{n} */
-        .#{$class-prefix}-#{&n} {
-            width: ($n / 24) * 100%;
+        $class-prefix: col-;
+        @for $n from 1 through 24 {
+            &.#{$class-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
         }
     }
 </style>
