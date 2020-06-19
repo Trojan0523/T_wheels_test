@@ -23,16 +23,12 @@
             --border-color-hover: #666;
             --button-active-bg: #eee;
         }
-
         #app {
             margin: 20px;
         }
 
         body {
             font-size: var(--font-size);
-        }
-        .box {
-             margin: 20px;
         }
     </style>
 </head>
@@ -44,31 +40,27 @@
             <t-col></t-col>
         </t-row>
     </div>
-<div style="border: 1px solid black;">
-    <t-row gutter="20">
-        <t-col gutter="20">1</t-col>
-        <t-col gutter="20">1</t-col>
-    </t-row>
-    <t-row gutter="30">
-        <t-col>1</t-col>
-        <t-col>1</t-col>
-    </t-row>
-    <t-row gutter="20">
-        <t-col span="2">1</t-col>
-        <t-col span="11">1</t-col>
-        <t-col span="4">1</t-col>
-        <t-col span="7" offset="1">1</t-col>
-    </t-row>
-    <t-row gutter="20">
-        <t-col span="4">1</t-col>
-        <t-col span="18">11</t-col>
-    </t-row>
-</div>
-
-
-
-
-    <hr />
+    <div style="border: 1px solid black;">
+        <t-row gutter="20">
+            <t-col gutter="20">1</t-col>
+            <t-col gutter="20">1</t-col>
+        </t-row>
+        <t-row gutter="30">
+            <t-col>1</t-col>
+            <t-col>1</t-col>
+        </t-row>
+        <t-row gutter="20">
+            <t-col span="2">1</t-col>
+            <t-col span="11">1</t-col>
+            <t-col span="4">1</t-col>
+            <t-col span="7" offset="1">1</t-col>
+        </t-row>
+        <t-row gutter="20">
+            <t-col span="4">1</t-col>
+            <t-col span="18">11</t-col>
+        </t-row>
+    </div>
+    <hr/>
     <div class="box">
         <t-input value="hi" v-model="message"></t-input>
         <p>{{message}}</p>
@@ -101,7 +93,6 @@
             <g-button icon="right" icon-position="right">下一页</g-button>
         </g-button-group>
     </div>
-
 </div>
 <script src="src/app.js"></script>
 

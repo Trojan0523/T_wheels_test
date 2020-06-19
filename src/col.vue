@@ -41,7 +41,6 @@
 
 <style lang="scss" scoped>
     .col {
-        width: 50%;
         $class-prefix: col-;
         padding-left: 10px;
         @for $n from 1 through 24 {
