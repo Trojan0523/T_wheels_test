@@ -31,9 +31,25 @@
             font-size: var(--font-size);
         }
     </style>
+    <style>
+        .demo {
+            background: #ddd;
+            border: 1px solid #666666;
+            height: 100px;
+
+        }
+    </style>
 </head>
 <body>
 <div id="app">
+    <t-row>
+        <t-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}"><div class="demo" ></div></t-col>
+        <t-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}"><div class="demo"></div></t-col>
+        <t-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}"><div class="demo"></div></t-col>
+        <t-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}"><div class="demo"></div></t-col>
+        <t-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}"><div class="demo"></div></t-col>
+    </t-row>
+
     <div style="margin: 10px">
         <t-row>
             <t-col></t-col>
