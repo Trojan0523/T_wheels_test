@@ -13,7 +13,7 @@
             box-sizing: border-box;
         }
 
-        :root {
+        html {
             --button-height: 32px;
             --font-size: 14px;
             --button-bg: white;
@@ -42,18 +42,26 @@
 </head>
 <body>
 <div id="app">
-    <t-row>
-        <t-col span="23" offset="1" :narrow-pc="{span:12,offset:12}">
+    <div>
+        <t-row gutter="20">
+            <t-col span="12"><div class="demo"></div></t-col>
+            <t-col span="12"><div class="demo"></div></t-col>
+        </t-row>
+    </div>
+
+    <t-row gutter="20">
+        <t-col span="11" offset="1" :narrow-pc="{span:12,offset:12}">
+            <div class="demo" ></div>
+        </t-col>
+        <t-col span="11" offset="1" :narrow-pc="{span:12,offset:12}">
             <div class="demo" ></div>
         </t-col>
     </t-row>
+    <t-row gutter="20" style="height: 50px;border: 1px solid darkred;margin: 10px;">
+        <t-col span="12" style="border: 1px saddlebrown solid"></t-col>
+        <t-col span="12" style="border: 1px saddlebrown solid"></t-col>
+    </t-row>
 
-    <div style="margin: 10px">
-        <t-row>
-            <t-col></t-col>
-            <t-col></t-col>
-        </t-row>
-    </div>
     <div style="border: 1px solid black;">
         <t-row gutter="20">
             <t-col span="24" :ipad="{span:8}" :pc="{span:2}" :narrwo-pc="{span:4}" :wide-pc="{span:1}">1</t-col>

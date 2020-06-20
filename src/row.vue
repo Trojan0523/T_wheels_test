@@ -14,23 +14,18 @@
             align: {
                 type: String,
                 validator(value) {
-                    return ['left','right','center'].includes(value);
+                    return ['left', 'right', 'center'].includes(value);
                 }
             }
         },
         computed: {
-          rowStyle(){
-              let {gutter} = this
-              return {
-                  marginLeft: -gutter/2 + 'px',
-                  marginRight: -gutter/2 +'px'
-              }
+            rowStyle() {
+                let {gutter} = this
+                return {marginLeft: -gutter / 2 + 'px', marginRight: -gutter / 2 + 'px'}
             },
             rowClass() {
-              let {align} = this
+                let {align} = this
                 return [align && `align-${align}`]
-
-
             }
         },
         mounted() {
@@ -44,13 +39,16 @@
 <style lang="scss" scoped>
     .row {
         display: flex;
-        &.align-left{
+        flex-wrap: wrap;
+        &.align-left {
             justify-content: flex-start;
         }
-        &.align-right{
+
+        &.align-right {
             justify-content: flex-end;
         }
-        &.align-center{
+
+        &.align-center {
             justify-content: center;
         }
     }
