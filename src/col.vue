@@ -35,17 +35,31 @@
                 gutter: 0
             }
         },
+        methods: {
+             createClasses  (obj, str = '') {
+                if (!obj) {
+                    return []
+                }
+                let array = []
+                if (obj.span) {
+                    array.push(`col-${str}${obj.span}`)
+                }
+                if (obj.offset) {
+                    array.push(`offset-${str}${obj.offset}`)
+                }
+                return array
+            }
+        },
         computed: {
             colClasses() {
                 let {span, offset, ipad, narrowPc, pc, widePc} = this
+                let createClasses = this.createClasses
                 return [
-                    span && ` col-${span}`,
-                    offset && ` offset-${offset}`,
-                    ...(ipad ? [`col-ipad-${ipad.span}`] : []),
-                    ...(narrowPc ? [`col-narrowPc-${narrowPc.span}`] :[]),
-                    ...(pc ? [`col-pc-${pc.span}`] :[]),
-                    ...(widePc ? [`col-widePc-${widePc.span}`] :[])
-
+                    ...createClasses({span, offset}),
+                    ...createClasses(ipad, 'ipad-'),
+                    ...createClasses(narrowPc, 'narrow-pc-'),
+                    ...createClasses(pc, 'pc-'),
+                    ...createClasses(widePc, 'wide-pc-'),
                 ]
             },
             colStyle() {
@@ -73,7 +87,7 @@
                 margin-left: ($n / 24) * 100%;
             }
         }
-        @media (min-width: 577px) and (max-width: 768px) {
+        @media (min-width: 577px)  {
             $class-prefix: col-ipad-;
             padding-left: 10px;
             @for $n from 1 through 24 {
@@ -88,7 +102,7 @@
                 }
             }
         }
-        @media (min-width: 769px)  {
+        @media (min-width: 769px) {
             $class-prefix: col-narrow-pc-;
             padding-left: 10px;
             @for $n from 1 through 24 {
