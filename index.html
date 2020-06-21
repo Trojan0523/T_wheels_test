@@ -23,9 +23,8 @@
             --border-color-hover: #666;
             --button-active-bg: #eee;
         }
-        #app {
-            margin: 20px;
-        }
+
+        #app {}
 
         body {
             font-size: var(--font-size);
@@ -35,26 +34,48 @@
         .demo {
             background: #ddd;
             border: 1px solid #666666;
-            height: 100px;
+            min-height: 100px;
+        }
 
+        .demo2 {
+            border: 1px solid yellowgreen;
+            min-height: 100px;
         }
     </style>
 </head>
 <body>
 <div id="app">
     <div>
-        <t-row gutter="20">
-            <t-col span="12"><div class="demo"></div></t-col>
-            <t-col span="12"><div class="demo"></div></t-col>
+        <t-layout style="height: 100vh;">
+            <t-sider class="demo2">sider</t-sider>
+
+            <t-layout>
+                <t-header class="demo2">header</t-header>
+                <t-content class="demo2">content</t-content>
+                <t-footer class="demo2">footer</t-footer>
+            </t-layout>
+
+        </t-layout>
+    </div>
+
+
+    <div>
+        <t-row gutter="20" style="margin: 10px;">
+            <t-col span="12">
+                <div class="demo"></div>
+            </t-col>
+            <t-col span="12">
+                <div class="demo"></div>
+            </t-col>
         </t-row>
     </div>
 
     <t-row gutter="20">
         <t-col span="11" offset="1" :narrow-pc="{span:12,offset:12}">
-            <div class="demo" ></div>
+            <div class="demo"></div>
         </t-col>
         <t-col span="11" offset="1" :narrow-pc="{span:12,offset:12}">
-            <div class="demo" ></div>
+            <div class="demo"></div>
         </t-col>
     </t-row>
     <t-row gutter="20" style="height: 50px;border: 1px solid darkred;margin: 10px;">
