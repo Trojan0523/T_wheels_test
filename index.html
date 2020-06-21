@@ -41,18 +41,29 @@
             border: 1px solid yellowgreen;
             min-height: 100px;
         }
+        .sider{
+            background: #333;
+            width: 200px;
+        }
+        .header {
+            background: #999;
+            height: 100px;
+        }
+        .footer {
+            background: #ccc;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
 <div id="app">
     <div>
         <t-layout style="height: 100vh;">
-            <t-sider class="demo2">sider</t-sider>
-
+            <t-sider>sider</t-sider>
             <t-layout>
-                <t-header class="demo2">header</t-header>
-                <t-content class="demo2">content</t-content>
-                <t-footer class="demo2">footer</t-footer>
+                <t-header>header</t-header>
+                <t-content>content</t-content>
+                <t-footer>footer</t-footer>
             </t-layout>
 
         </t-layout>
@@ -138,6 +149,5 @@
     </div>
 </div>
 <script src="src/app.js"></script>
-
 </body>
 </html>
