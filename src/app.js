@@ -26,6 +26,7 @@ Vue.component('t-sider', Sider)
 Vue.component('t-footer', Footer)
 Vue.component('t-toast', Toast)
 Vue.use(plugin)
+
 new Vue({
     el: '#app',
     data: {
@@ -40,9 +41,18 @@ new Vue({
         inputChange(e) {
             console.log(e.target.value);
         },
-        showToast() {
+        showToast1() {
+            this.showToast('top')
+        },
+        showToast2() {
+            this.showToast('middle')
+        },
+        showToast3() {
+            this.showToast('bottom')
+        },
+        showToast(position) {
             this.$toast(`你的智商目前为 ${parseInt(Math.random()*100)}。您的智商需要付费`, {
-                position: 'middle',
+                position,
                 enableHtml: false,
                 closeButton: {
                     text: '已充值',
@@ -50,8 +60,8 @@ new Vue({
                         console.log('他说已经付费了');
                     }
                 },
-                autoClose: false,
+                autoClose: 3,
             })
-        }
+        },
     }
 })
