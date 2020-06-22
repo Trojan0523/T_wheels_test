@@ -35,8 +35,16 @@ new Vue({
         message: 'h1'
     },
     created() {
-        this.$toast('很多文字很多文字很多文字', {
-            enableHtml: true
+        this.$toast('您的智商需要付费', {
+            position: 'middle',
+            enableHtml: false,
+            closeButton: {
+                text: '已充值',
+                callback() {
+                    console.log('他说已经付费了');
+                }
+            },
+            autoClose: false,
         })
     },
     methods: {
