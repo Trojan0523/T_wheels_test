@@ -66,6 +66,7 @@
             },
             close() {
                 this.$el.remove()
+                this.$emit('close')
                 this.$destroy()
             },
             onclickClose() {
@@ -83,7 +84,12 @@
     $toast-min-height: 40px;
     $toast-bg: rgba(0, 0, 0, 0.75);
     $box-shadow: 0 0 3px;
+    @keyframes fade-in {
+        0% {opacity: 0; transform: translateY(100%)}
+        100% {opacity: 1; transform: translateY(0%)}
+    }
     .toast {
+        animation: fade_in 4s;
         color: white;
         background: $toast-bg;
         position: fixed;
