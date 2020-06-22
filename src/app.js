@@ -35,14 +35,15 @@ new Vue({
         message: 'h1'
     },
     created() {
-
+        this.$toast('很多文字很多文字很多文字', {
+            enableHtml: true
+        })
     },
     methods: {
         inputChange(e) {
             console.log(e.target.value);
         },
         showToast() {
-            this.$toast('我是message')
         }
     }
 })
