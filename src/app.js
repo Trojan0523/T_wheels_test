@@ -35,23 +35,23 @@ new Vue({
         message: 'h1'
     },
     created() {
-        this.$toast('您的智商需要付费', {
-            position: 'middle',
-            enableHtml: false,
-            closeButton: {
-                text: '已充值',
-                callback() {
-                    console.log('他说已经付费了');
-                }
-            },
-            autoClose: false,
-        })
     },
     methods: {
         inputChange(e) {
             console.log(e.target.value);
         },
         showToast() {
+            this.$toast(`你的智商目前为 ${parseInt(Math.random()*100)}。您的智商需要付费`, {
+                position: 'bottom',
+                enableHtml: false,
+                closeButton: {
+                    text: '已充值',
+                    callback() {
+                        console.log('他说已经付费了');
+                    }
+                },
+                autoClose: false,
+            })
         }
     }
 })
