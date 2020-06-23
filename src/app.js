@@ -40,7 +40,7 @@ Vue.use(plugin)
 new Vue({
     el: '#app',
     data: {
-        selectedTab: 'sport',
+        selectedTab: 'sports',
         loading1: false,
         loading2: true,
         loading3: false,

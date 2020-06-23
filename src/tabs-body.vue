@@ -6,7 +6,10 @@
 
 <script>
     export default {
-        name: 'TTabsBody'
+        name: 'TTabsBody',
+        inject: ['eventBus'],
+        created() {
+        }
     }
 </script>
 

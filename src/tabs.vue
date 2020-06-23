@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     export default {
         name: 'TTabs',
         props: {
@@ -18,8 +19,19 @@
                 return ['horizontal','vertical'].indexOf(value) >= 0
             }
         },
-        created() {
+        data() {
+            return {
+                eventBus: new Vue()
+            }
+        },
+        provide() {
+          return {
+              eventBus: this.eventBus
+          }
+        },
+        mounted() {
             // this.$emit('update:selected', 'xxx')
+            this.eventBus.$emit('update:selected',this.selected)
         }
     }
 </script>
