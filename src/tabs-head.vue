@@ -30,6 +30,7 @@
         display: flex;
         height: $tab-height;
         justify-content: flex-start;
+        position: relative;
         border-bottom: 1px solid $border-color;
         > .line {
             position: absolute;
