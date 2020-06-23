@@ -31,6 +31,9 @@
             }
         },
         mounted () {
+            if(this.$children.length === 0) {
+               console && console.warn && console.warn('tabs的子组件应该是tabs-head和tabs-item, 但是你没有写子组件')
+            }
             this.$children.forEach((vm) => {
                 if (vm.$options.name === 'TTabsHead') {
                     vm.$children.forEach((childVm) => {
