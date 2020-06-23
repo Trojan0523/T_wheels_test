@@ -7,12 +7,12 @@
 <script>
     export default {
         name: 'TTabsItem',
+        inject: ['eventBus'],
         data() {
             return {
                 action: false
             }
         },
-        inject: ['eventBus'],
         props: {
             disabled: {
                 type: Boolean,
@@ -25,7 +25,7 @@
         },
         created() {
             this.eventBus.$on('update:selected', (name) => {
-                this.name = name === this.name;
+                this.active = name === this.name;
 
             })
         },
@@ -47,8 +47,13 @@
 <style lang="scss" scoped>
     .tabs-item {
         flex-shrink: 0;
-        padding: 0 2em;
-        &.active {
+        padding: 0 1em;
+        cursor: pointer;
+        border: 1px solid green;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        &:active {
             background: red;
         }
     }
