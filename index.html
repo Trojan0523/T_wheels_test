@@ -57,6 +57,21 @@
 </head>
 <body>
 <div id="app">
+    <t-tabs :selected.sync="selectedTab" direction="horizontal">
+        <t-tabs-head>
+            <template slot="actions">
+                <t-button>设置</t-button>
+            </template>
+            <t-tabs-item name="women"><t-icon name="settings"></t-icon>美女</t-tabs-item>
+            <t-tabs-item name="finance" disabled>财经</t-tabs-item>
+            <t-tabs-item name="sports">体育</t-tabs-item>
+        </t-tabs-head>
+        <t-tabs-body>
+            <t-tabs-pane name="women">美女相关资讯</t-tabs-pane>
+            <t-tabs-pane name="finance">财经相关资讯</t-tabs-pane>
+            <t-tabs-pane name="sports">体育相关资讯</t-tabs-pane>
+        </t-tabs-body>
+    </t-tabs>
     <button @click="showToast1">top</button>
     <button @click="showToast2">middle</button>
     <button @click="showToast3">bottom</button>
@@ -151,7 +166,6 @@
             <g-button icon="right" icon-position="right">下一页</g-button>
         </g-button-group>
     </div>
-</div>
 </div>
 <script src="src/app.js"></script>
 </body>
