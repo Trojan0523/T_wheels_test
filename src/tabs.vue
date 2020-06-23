@@ -6,6 +6,7 @@
 
 <script>
     import Vue from 'vue'
+
     export default {
         name: 'TTabs',
         props: {
@@ -17,7 +18,7 @@
                 type: String,
                 default: 'horizontal',
                 validator(value) {
-                    return ['horizontal','vertical'].indexOf(value) >= 0
+                    return ['horizontal', 'vertical'].indexOf(value) >= 0
                 }
             }
         },
@@ -27,13 +28,21 @@
             }
         },
         provide() {
-          return {
-              eventBus: this.eventBus
-          }
+            return {
+                eventBus: this.eventBus
+            }
         },
         mounted() {
-            // this.$emit('update:selected', 'xxx')
-            this.eventBus.$emit('update:selected',this.selected)
+            this.$children.forEach((vm) => {
+                if (vm.$options.name === 'TTabsHead') {
+                    vm.$children.forEach((childVm) => {
+                        if (childVm.$options.name === 'TTabsItem' && childVm.name === this.selected) {
+                            console.log(childVm.$el);
+                            this.eventBus.$emit('update:selected', this.selected,vm)
+                        }
+                    })
+                }
+            })
         }
     }
 </script>
