@@ -54,7 +54,6 @@
         align-items: center;
         height: 100%;
         &.active {
-            background: red;
             color: $color;
             font-weight: bold;
         }
