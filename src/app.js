@@ -19,9 +19,9 @@ import TabsPane from "./tabs-pane"
 import TPopover from "./popover"
 import plugin from "./plugin";
 
-Vue.component('g-button', Button);
+Vue.component('t-button', Button);
 Vue.component('t-icon', Icon);
-Vue.component('g-button-group', Group);
+Vue.component('t-button-group', Group);
 Vue.component('t-input', Input);
 Vue.component('t-row', Row);
 Vue.component('t-col', Col)

@@ -46,7 +46,7 @@
         name: 'app',
         components: {
             HelloWorld,
-            'g-button': Button,
+            't-button': Button,
             't-icon': Icon
    }
    }

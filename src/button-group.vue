@@ -1,5 +1,5 @@
 <template>
-    <div class="g-button-group">
+    <div class="t-button-group">
         <slot></slot>
     </div>
 </template>
@@ -11,7 +11,7 @@
             for (let node of this.$el.children) {
                 let name = node.nodeName.toLocaleLowerCase();
                 if (name !== 'button') {
-                    console.warn(`g-button-group的子元素应该全是 g-button,但你写的是${name}`);
+                    console.warn(`t-button-group的子元素应该全是 t-button,但你写的是${name}`);
                 }
             }
         }
@@ -19,11 +19,11 @@
 </script>
 
 <style lang="scss" scoped>
-    .g-button-group {
+    .t-button-group {
         display: inline-flex;
         vertical-align: middle;
 
-        > .g-button {
+        > .t-button {
             border-radius: 0;
 
             &:not(:first-child) {

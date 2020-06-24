@@ -110,115 +110,116 @@
             <t-button>点我</t-button>
         </t-popover>
     </div>
-<!--    <t-tabs :selected.sync="selectedTab" position="vertical">-->
-<!--        <t-tabs-head>-->
-<!--            <template slot="actions">-->
-<!--                <t-button>设置</t-button>-->
-<!--            </template>-->
-<!--            <t-tabs-item name="women" disabled><t-icon name="settings" ></t-icon>美女</t-tabs-item>-->
-<!--            <t-tabs-item name="finance">财经</t-tabs-item>-->
-<!--            <t-tabs-item name="sports">体育</t-tabs-item>-->
-<!--        </t-tabs-head>-->
-<!--        <t-tabs-body>-->
-<!--            <t-tabs-pane name="women">美女相关资讯</t-tabs-pane>-->
-<!--            <t-tabs-pane name="finance">财经相关资讯</t-tabs-pane>-->
-<!--            <t-tabs-pane name="sports">体育相关资讯</t-tabs-pane>-->
-<!--        </t-tabs-body>-->
-<!--    </t-tabs>-->
-<!--    <button @click="showToast1">top</button>-->
-<!--    <button @click="showToast2">middle</button>-->
-<!--    <button @click="showToast3">bottom</button>-->
 
-<!--    <div>-->
-<!--        <t-layout style="height: 100vh;">-->
-<!--            <t-sider>sider</t-sider>-->
-<!--            <t-layout>-->
-<!--                <t-header>header</t-header>-->
-<!--                <t-content>content</t-content>-->
-<!--                <t-footer>footer</t-footer>-->
-<!--            </t-layout>-->
+    <t-tabs :selected.sync="selectedTab" position="vertical">
+        <t-tabs-head>
+            <template slot="actions">
+                <t-button>设置</t-button>
+            </template>
+            <t-tabs-item name="women" disabled><t-icon name="settings" ></t-icon>美女</t-tabs-item>
+            <t-tabs-item name="finance">财经</t-tabs-item>
+            <t-tabs-item name="sports">体育</t-tabs-item>
+        </t-tabs-head>
+        <t-tabs-body>
+            <t-tabs-pane name="women">美女相关资讯</t-tabs-pane>
+            <t-tabs-pane name="finance">财经相关资讯</t-tabs-pane>
+            <t-tabs-pane name="sports">体育相关资讯</t-tabs-pane>
+        </t-tabs-body>
+    </t-tabs>
+    <button @click="showToast1">top</button>
+    <button @click="showToast2">middle</button>
+    <button @click="showToast3">bottom</button>
 
-<!--        </t-layout>-->
-<!--    </div>-->
+    <div>
+        <t-layout style="height: 100vh;">
+            <t-sider>sider</t-sider>
+            <t-layout>
+                <t-header>header</t-header>
+                <t-content>content</t-content>
+                <t-footer>footer</t-footer>
+            </t-layout>
+
+        </t-layout>
+    </div>
 
 
-<!--    <div>-->
-<!--        <t-row gutter="20" style="margin: 10px;">-->
-<!--            <t-col span="12">-->
-<!--                <div class="demo"></div>-->
-<!--            </t-col>-->
-<!--            <t-col span="12">-->
-<!--                <div class="demo"></div>-->
-<!--            </t-col>-->
-<!--        </t-row>-->
-<!--    </div>-->
+    <div>
+        <t-row gutter="20" style="margin: 10px;">
+            <t-col span="12">
+                <div class="demo"></div>
+            </t-col>
+            <t-col span="12">
+                <div class="demo"></div>
+            </t-col>
+        </t-row>
+    </div>
 
-<!--    <t-row gutter="20">-->
-<!--        <t-col span="11" offset="1" :narrow-pc="{span:12,offset:12}">-->
-<!--            <div class="demo"></div>-->
-<!--        </t-col>-->
-<!--        <t-col span="11" offset="1" :narrow-pc="{span:12,offset:12}">-->
-<!--            <div class="demo"></div>-->
-<!--        </t-col>-->
-<!--    </t-row>-->
-<!--    <t-row gutter="20" style="height: 50px;border: 1px solid darkred;margin: 10px;">-->
-<!--        <t-col span="12" style="border: 1px saddlebrown solid"></t-col>-->
-<!--        <t-col span="12" style="border: 1px saddlebrown solid"></t-col>-->
-<!--    </t-row>-->
+    <t-row gutter="20">
+        <t-col span="11" offset="1" :narrow-pc="{span:12,offset:12}">
+            <div class="demo"></div>
+        </t-col>
+        <t-col span="11" offset="1" :narrow-pc="{span:12,offset:12}">
+            <div class="demo"></div>
+        </t-col>
+    </t-row>
+    <t-row gutter="20" style="height: 50px;border: 1px solid darkred;margin: 10px;">
+        <t-col span="12" style="border: 1px saddlebrown solid"></t-col>
+        <t-col span="12" style="border: 1px saddlebrown solid"></t-col>
+    </t-row>
 
-<!--    <div style="border: 1px solid black;">-->
-<!--        <t-row gutter="20">-->
-<!--            <t-col span="24" :ipad="{span:8}" :pc="{span:2}" :narrwo-pc="{span:4}" :wide-pc="{span:1}">1</t-col>-->
-<!--            <t-col span="24" :ipad="{span:16}" :pc="{span:22}" :narrwo-pc="{span:20}" :wide-pc="{span:23}">1</t-col>-->
-<!--        </t-row>-->
-<!--        <t-row gutter="30">-->
-<!--            <t-col>1</t-col>-->
-<!--            <t-col>1</t-col>-->
-<!--        </t-row>-->
-<!--        <t-row gutter="20">-->
-<!--            <t-col span="2">1</t-col>-->
-<!--            <t-col span="11">1</t-col>-->
-<!--            <t-col span="4">1</t-col>-->
-<!--            <t-col span="7" offset="1">1</t-col>-->
-<!--        </t-row>-->
-<!--        <t-row gutter="20">-->
-<!--            <t-col span="4">1</t-col>-->
-<!--            <t-col span="18">11</t-col>-->
-<!--        </t-row>-->
-<!--    </div>-->
-<!--    <hr/>-->
-<!--    <div class="box">-->
-<!--        <t-input value="hi" v-model="message"></t-input>-->
-<!--        <p>{{message}}</p>-->
-<!--    </div>-->
-<!--    <div class="box">-->
-<!--        <t-input value="张三" disabled></t-input>-->
-<!--        <t-input value="李四" readonly></t-input>-->
-<!--        <t-input value="王五"></t-input>-->
-<!--        <t-input value="徐七" @change="inputChange"></t-input>-->
-<!--    </div>-->
-<!--    <div class="box">-->
-<!--        <t-input value="神六" error="姓名不能少于两个字"></t-input>-->
-<!--    </div>-->
-<!--    <div class="box">-->
-<!--        <g-button :loading="loading1" @click="loading1 = !loading1">-->
-<!--            按钮-->
-<!--        </g-button>-->
-<!--        <g-button icon="settings" :loading="loading2"-->
-<!--                  @click="loading2 = !loading2">-->
-<!--            按钮-->
-<!--        </g-button>-->
-<!--        <g-button icon="settings" icon-position="right" :loading="loading3"-->
-<!--                  @click="loading3 = !loading3">-->
-<!--            按钮-->
-<!--        </g-button>-->
-<!--        <g-button icon="thumbs-up" icon-position="left">点赞</g-button>-->
-<!--        <g-button-group>-->
-<!--            <g-button icon="left">上一页</g-button>-->
-<!--            <g-button>更多</g-button>-->
-<!--            <g-button icon="right" icon-position="right">下一页</g-button>-->
-<!--        </g-button-group>-->
-<!--    </div>-->
+    <div style="border: 1px solid black;">
+        <t-row gutter="20">
+            <t-col span="24" :ipad="{span:8}" :pc="{span:2}" :narrwo-pc="{span:4}" :wide-pc="{span:1}">1</t-col>
+            <t-col span="24" :ipad="{span:16}" :pc="{span:22}" :narrwo-pc="{span:20}" :wide-pc="{span:23}">1</t-col>
+        </t-row>
+        <t-row gutter="30">
+            <t-col>1</t-col>
+            <t-col>1</t-col>
+        </t-row>
+        <t-row gutter="20">
+            <t-col span="2">1</t-col>
+            <t-col span="11">1</t-col>
+            <t-col span="4">1</t-col>
+            <t-col span="7" offset="1">1</t-col>
+        </t-row>
+        <t-row gutter="20">
+            <t-col span="4">1</t-col>
+            <t-col span="18">11</t-col>
+        </t-row>
+    </div>
+    <hr/>
+    <div class="box">
+        <t-input value="hi" v-model="message"></t-input>
+        <p>{{message}}</p>
+    </div>
+    <div class="box">
+        <t-input value="张三" disabled></t-input>
+        <t-input value="李四" readonly></t-input>
+        <t-input value="王五"></t-input>
+        <t-input value="徐七" @change="inputChange"></t-input>
+    </div>
+    <div class="box">
+        <t-input value="神六" error="姓名不能少于两个字"></t-input>
+    </div>
+    <div class="box">
+        <t-button :loading="loading1" @click="loading1 = !loading1">
+            按钮
+        </t-button>
+        <t-button icon="settings" :loading="loading2"
+                  @click="loading2 = !loading2">
+            按钮
+        </t-button>
+        <t-button icon="settings" icon-position="right" :loading="loading3"
+                  @click="loading3 = !loading3">
+            按钮
+        </t-button>
+        <t-button icon="thumbs-up" icon-position="left">点赞</t-button>
+        <t-button-group>
+            <t-button icon="left">上一页</t-button>
+            <t-button>更多</t-button>
+            <t-button icon="right" icon-position="right">下一页</t-button>
+        </t-button-group>
+    </div>
 </div>
 <script src="src/app.js"></script>
 </body>
