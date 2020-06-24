@@ -1,4 +1,3 @@
-
 const expect = chai.expect;
 import Vue from 'vue'
 import Popover from '../src/popover'
@@ -33,8 +32,30 @@ describe('Popover', () => {
                 done()
             })
         })
-        // const useElement = vm.$el.querySelector('use')
-        // expect(useElement.getAttribute('xlink:href')).to.equal('#isettings')
-        // vm.$destroy()
     })
+
+    xit('可以设置trigger', (done) => {
+            Vue.component('t-popover', Popover)
+            const div = document.createElement('div')
+            document.body.appendChild(div)
+            div.innerHTML = `
+        <t-popover trigger="hover" ref="a">
+        <template slot="content">
+        弹出内容
+        </template>
+        <button>点赞</button>
+    </t-popover>
+        `
+            const vm = new Vue({
+                el: div
+            })
+            let event = new Event('mouseenter');
+            vm.$el.dispatchEvent(event)
+            console.log('11111111111');
+            vm.$nextTick(() => {
+                const {contentWrapper} = vm.$refs.a.$refs
+                expect(contentWrapper).to.exist
+                done()
+            })
+        });
 })
