@@ -1,9 +1,11 @@
 <template>
     <div class="popover" @click.stop="xxx">
-        <div class="content-wrapper" v-if="visible" @click.stop>
+        <div ref="contentWrapper" class="content-wrapper" v-if="visible">
             <slot name="content"></slot>
         </div>
-        <slot></slot>
+        <span ref="triggerWrapper">
+            <slot></slot>
+        </span>
     </div>
 </template>
 
@@ -17,10 +19,14 @@
             xxx() {
                 this.visible = !this.visible
                 if (this.visible === true) {
-                    setTimeout(() => {
+                    this.$nextTick(() => {
+                        document.body.appendChild(this.$refs.contentWrapper)
+                        let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+                        console.log(width, height, top, left);
+                        this.$refs.contentWrapper.style.left = left + window.scrollX +'px'
+                        this.$refs.contentWrapper.style.top = top + window.scrollY +'px'
                         let eventHandler = () => {
                             this.visible = false
-                            console.log('document 隐藏了 popover');
                             document.removeEventListener('click', eventHandler)
                         }
                         document.addEventListener('click', eventHandler)
@@ -29,6 +35,8 @@
                     console.log('vm 隐藏popover');
                 }
             }
+        },
+        mounted() {
         }
     }
 </script>
@@ -37,13 +45,12 @@
     .popover {
         display: inline-block;
         vertical-align: top;
-
-        .content-wrapper {
-            position: relative;
-            bottom: 100%;
-            left: 0;
-            border: 1px solid red;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-        }
+        position: relative;
+    }
+    .content-wrapper {
+        position: absolute;
+        border: 1px solid red;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        transform: translateY(-100%);
     }
 </style>
