@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" @click="onClick" ref="popover">
+    <div class="popover" ref="popover">
         <div ref="contentWrapper" class="content-wrapper" v-if="visible"
              :class="{[`position-${position}`]: true}">
             <slot name="content"></slot>
@@ -14,7 +14,50 @@
     export default {
         name: 'TPopvoer',
         data() {
-            return {visible: false}
+            return {visible: false,}
+        },
+        mounted() {
+            if(this.trigger === 'click') {
+                this.$refs.popover.addEventListener('click', this.onClick)
+            }else {
+                this.$refs.popover.addEventListener('mouseenter', this.open)
+                this.$refs.popover.addEventListener('mouseleave',this.close)
+            }
+            // this.$refs.popover.addEventListener(this.openEvent, (event) => {
+            //     console.log(event.target);
+            //     if (this.$refs.triggerWrapper.contains(event.target)) {
+            //         this.open()
+            //     }
+            // })
+            // this.$refs.popover.addEventListener(this.closeEvent, (event) => {
+            //     if (this.$refs.triggerWrapper.contains(event.target)) {
+            //         this.close()
+            //     }
+            // })
+        },
+        destroyed() {
+            if(this.trigger === 'click') {
+                this.$refs.popover.removeEventListener('click', this.onClick)
+            }else {
+                this.$refs.popover.removeEventListener('mouseenter', this.open)
+                this.$refs.popover.removeEventListener('mouseleave',this.close)
+            }
+        },
+        computed: {
+            openEvent() {
+                if (this.trigger === 'click') {
+                    return 'click'
+                } else {
+                    return 'mouseenter'
+                }
+            },
+            closeEvent() {
+                if (this.trigger === 'click') {
+                    return 'click'
+                } else {
+                    return 'mouseleave'
+                }
+            }
         },
         props: {
             position: {
@@ -23,7 +66,13 @@
                 validator(value) {
                     return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
                 }
-
+            },
+            trigger: {
+                type: String,
+                default: 'click',
+                validator(value) {
+                    return ['click', 'hover'].indexOf(value) >= 0
+                }
             }
         },
         methods: {
@@ -42,16 +91,16 @@
                         left: left + window.scrollX,
                     },
                     left: {
-                        top: top + window.scrollY + (height - height2) / 2 ,
+                        top: top + window.scrollY + (height - height2) / 2,
                         left: left + window.scrollX,
                     },
                     right: {
-                        top:top + window.scrollY + (height - height2) / 2,
+                        top: top + window.scrollY + (height - height2) / 2,
                         left: left + window.scrollX + width,
                     }
                 }
-                contentWrapper.style.left =  positions[this.position].left + 'px'
-                contentWrapper.style.top =  positions[this.position].top + 'px'
+                contentWrapper.style.left = positions[this.position].left + 'px'
+                contentWrapper.style.top = positions[this.position].top + 'px'
             },
             onClickDocument(e) {
                 if (this.$refs.popover &&
@@ -85,8 +134,7 @@
                 }
             }
         },
-        mounted() {
-        }
+
     }
 </script>
 
@@ -109,6 +157,7 @@
         background: white;
         max-width: 20em;
         word-break: break-all;
+
         &::before, &::after {
             content: '';
             display: block;
@@ -117,6 +166,7 @@
             height: 10px;
             position: absolute;
         }
+
         &.position-top {
             margin-top: -10px;
             transform: translateY(-100%);
@@ -157,6 +207,7 @@
         &.position-left {
             transform: translateX(-100%);
             margin-left: -10px;
+
             &::before, &::after {
                 transform: translateY(-50%);
                 height: 1px;
@@ -168,13 +219,16 @@
                 left: 100%;
 
             }
+
             &::after {
                 border-left-color: white;
                 left: calc(100% - 1px);
             }
         }
+
         &.position-right {
             margin-left: 10px;
+
             &::before, &::after {
                 transform: translateY(-50%);
                 height: 1px;
@@ -186,6 +240,7 @@
                 right: 100%;
 
             }
+
             &::after {
                 border-right-color: white;
                 right: calc(100% - 1px);
