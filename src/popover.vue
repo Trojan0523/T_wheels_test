@@ -2,7 +2,7 @@
     <div class="popover" ref="popover">
         <div ref="contentWrapper" class="content-wrapper" v-if="visible"
              :class="{[`position-${position}`]: true}">
-            <slot name="content"></slot>
+            <slot name="content"  :close="close"></slot>
         </div>
         <span ref="triggerWrapper" style="display:inline-block;">
             <slot></slot>
@@ -13,6 +13,22 @@
 <script lang="js">
     export default {
         name: 'TPopvoer',
+        props: {
+            position: {
+                type: String,
+                default: 'top',
+                validator(value) {
+                    return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
+                }
+            },
+            trigger: {
+                type: String,
+                default: 'click',
+                validator(value) {
+                    return ['click', 'hover'].indexOf(value) >= 0
+                }
+            },
+        },
         data() {
             return {visible: false,}
         },
@@ -23,17 +39,6 @@
                 this.$refs.popover.addEventListener('mouseenter', this.open)
                 this.$refs.popover.addEventListener('mouseleave',this.close)
             }
-            // this.$refs.popover.addEventListener(this.openEvent, (event) => {
-            //     console.log(event.target);
-            //     if (this.$refs.triggerWrapper.contains(event.target)) {
-            //         this.open()
-            //     }
-            // })
-            // this.$refs.popover.addEventListener(this.closeEvent, (event) => {
-            //     if (this.$refs.triggerWrapper.contains(event.target)) {
-            //         this.close()
-            //     }
-            // })
         },
         destroyed() {
             if(this.trigger === 'click') {
@@ -59,22 +64,7 @@
                 }
             }
         },
-        props: {
-            position: {
-                type: String,
-                default: 'top',
-                validator(value) {
-                    return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
-                }
-            },
-            trigger: {
-                type: String,
-                default: 'click',
-                validator(value) {
-                    return ['click', 'hover'].indexOf(value) >= 0
-                }
-            }
-        },
+
         methods: {
             positionContent() {
                 const {contentWrapper, triggerWrapper} = this.$refs
@@ -137,7 +127,6 @@
 
     }
 </script>
-
 <style lang="scss" scoped>
     $border-color: #333;
     $border-radius: 4px;
@@ -146,7 +135,6 @@
         vertical-align: top;
         position: relative;
     }
-
     .content-wrapper {
         padding: .5em 1em;
         position: absolute;
@@ -170,36 +158,38 @@
         &.position-top {
             margin-top: -10px;
             transform: translateY(-100%);
-
             &::before, &::after {
                 left: 10px;
             }
 
             &::before {
                 border-top-color: black;
+                border-bottom: none;
                 top: 100%;
             }
 
             &::after {
                 border-top-color: white;
+                border-bottom: none;
                 top: calc(100% - 1px);
             }
         }
 
         &.position-bottom {
             margin-top: 10px;
-
             &::before, &::after {
                 left: 10px;
             }
 
             &::before {
                 border-bottom-color: black;
+                border-top: none;
                 bottom: 100%;
             }
 
             &::after {
                 border-bottom-color: white;
+                border-top: none;
                 bottom: calc(100% - 1px);
             }
         }
@@ -207,42 +197,37 @@
         &.position-left {
             transform: translateX(-100%);
             margin-left: -10px;
-
             &::before, &::after {
                 transform: translateY(-50%);
                 height: 1px;
                 top: 50%;
             }
-
             &::before {
                 border-left-color: black;
+                border-right: none;
                 left: 100%;
-
             }
-
             &::after {
                 border-left-color: white;
+                border-right:none;
                 left: calc(100% - 1px);
             }
         }
-
         &.position-right {
             margin-left: 10px;
-
             &::before, &::after {
                 transform: translateY(-50%);
                 height: 1px;
                 top: 50%;
             }
-
             &::before {
                 border-right-color: black;
+                border-left: none;
                 right: 100%;
-
             }
-
             &::after {
                 border-right-color: white;
+                border-left: none;
                 right: calc(100% - 1px);
             }
         }

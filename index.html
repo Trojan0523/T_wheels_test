@@ -59,8 +59,9 @@
 <div id="app" style="padding: 100px; left: 100px; border: 1px solid red; overflow: hidden">
     <div style="padding-bottom: 150px">
     <t-popover position="bottom">
-        <template slot="content">
-            <div>popover 内容</div>
+        <template slot="content" slot-scope="{close}">
+
+            <div>popover 内容 <t-button @click="close">关闭</t-button> </div>
         </template>
         <t-button>点赞</t-button>
     </t-popover>
