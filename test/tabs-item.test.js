@@ -1,5 +1,3 @@
-import Button from "../src/button";
-
 const expect = chai.expect;
 import Vue from 'vue'
 import Tabs from '../src/tabs'
