@@ -17,6 +17,8 @@ import TabsItem from "./tabs-item"
 import TabsBody from "./tabs-body"
 import TabsPane from "./tabs-pane"
 import TPopover from "./popover"
+import TCollapse from "./collapse"
+import TCollapseItem from "./collapse-item"
 import plugin from "./plugin";
 
 Vue.component('t-button', Button);
@@ -37,6 +39,9 @@ Vue.component('t-tabs-item',TabsItem)
 Vue.component('t-tabs-body',TabsBody)
 Vue.component('t-tabs-pane',TabsPane)
 Vue.component('t-popover',TPopover)
+Vue.component('t-collapse',TCollapse)
+Vue.component('t-collapse-item',TCollapseItem)
+
 Vue.use(plugin)
 
 new Vue({
