@@ -35,12 +35,12 @@
 
 2. 安装T_Wheels
     ```
-   npm i --save trojan-test-1-1
+   npm i --save t-wheels
    ```
-3. 引入trojan-test-1-1
+3. 引入t-wheels
     ```
-    import {Button, ButtonGroup, Icon} from 'trojan-test-1-1'
-    import 'trojan-test-1-1/dist/index.css'
+    import {Button, ButtonGroup, Icon} from 't-wheels'
+    import 't-wheels/dist/index.css'
    
     export default {
         name: 'app',
@@ -54,12 +54,13 @@
 
 ## 文档
 
-## 提问
+http://pukhungyu.club/T_wheels_test/
 
 ## 变更记录
 
-## 联系方式
+commit -branch里面有详细的修改记录 
+
 
 ## 贡献代码
-> 作者: 卜雄宇(Trojan)
+> author: Trojan
 
