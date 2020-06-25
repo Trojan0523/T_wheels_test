@@ -47,7 +47,7 @@ Vue.use(plugin)
 new Vue({
     el: '#app',
     data: {
-        selectedTab: 'sports',
+        selectedTab: ['2','1'],
         loading1: false,
         loading2: true,
         loading3: false,
