@@ -48,6 +48,7 @@ new Vue({
     el: '#app',
     data: {
         selectedTab: ['2','1'],
+        selectedTab1: ['sports'],
         loading1: false,
         loading2: true,
         loading3: false,
