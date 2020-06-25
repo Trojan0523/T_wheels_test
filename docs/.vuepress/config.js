@@ -1,4 +1,5 @@
 module.exports = {
+    base: '/T_wheels_test/',
     title: 'T_Wheels UI',
     description: '一个自建的UI框架',
     themeConfig: {
@@ -18,7 +19,16 @@ module.exports = {
             },
             {
                 title: '组件',
-                children: ['/components/button']
+                children: [
+                    '/components/button',
+                    '/components/tabs',
+                    '/components/input',
+                    '/components/grid',
+                    '/components/layout',
+                    '/components/toast',
+                    '/components/collapse',
+
+                ]
             },
 
         ]
