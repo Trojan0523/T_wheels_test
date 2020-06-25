@@ -44,7 +44,7 @@
     $border-radius: 4px;
     $font-size: 12px;
     $red: #F1453D;
-    $box-shadow-color: rgb(0, 0, 0, 0.5);
+    $box-shadow-color: rgba(0, 0, 0, 0.5);
     .wrapper {
         font-size: $font-size;
         display: inline-flex;
