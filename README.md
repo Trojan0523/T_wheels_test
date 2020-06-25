@@ -15,23 +15,23 @@
     ```
     IE 8 及以上浏览齐都支持此样式。 
     
-    你还需要设置默认颜色等变量 (后续会改为SCSS变量)
+    你还需要设置默认颜色等变量 (已改为SCSS变量)
     
     ```
     html 
             {
-            --button-height: 32px;
-            --font-size: 14px;
-            --button-bg: white;
-            --border-radius: 4px;
-            --color: #333;
-            --border-color: #999;
-            --border-color-hover: #666;
-            --button-active-bg: #eee;
+            $button-height: 32px;
+            $font-size: 14px;
+            $button-bg: white;
+            $border-radius: 4px;
+            $color: #333;
+            $border-color: #999;
+            $border-color-hover: #666;
+            $button-active-bg: #eee;
             }
     
     ```
-    IE 15 及以上浏览齐都支持此样式。 
+    IE 15 及以上浏览器都支持此样式。 
 
 2. 安装T_Wheels
     ```
