@@ -41,11 +41,13 @@
             }
         },
         destroyed() {
+            let {popover} = this.$refs
+            // 由于会存在引用组件跳出其他页面时可能会出现重复移除监听的情况，所以这里做Defensive Programming写法进行短路判断
             if(this.trigger === 'click') {
-                this.$refs.popover.removeEventListener('click', this.onClick)
+                popover && popover.removeEventListener('click', this.onClick)
             }else {
-                this.$refs.popover.removeEventListener('mouseenter', this.open)
-                this.$refs.popover.removeEventListener('mouseleave',this.close)
+                popover && popover.removeEventListener('mouseenter', this.open)
+                popover && popover.removeEventListener('mouseleave',this.close)
             }
         },
         computed: {

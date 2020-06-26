@@ -6,7 +6,7 @@ module.exports = {
         nav: [
             {text: '主页', link: '/'},
             {text: '文档', link: '/guide/'},
-            {text: 'GitHub', link: 'https://www.google.com'},
+            {text: 'GitHub', link: 'https://github.com/Trojan0523'},
 
         ],
         sidebar: [
@@ -21,13 +21,13 @@ module.exports = {
                 title: '组件',
                 children: [
                     '/components/button',
-                    '/components/tabs',
                     '/components/input',
                     '/components/grid',
                     '/components/layout',
                     '/components/toast',
                     '/components/collapse',
-
+                    '/components/popover',
+                    '/components/tabs',
                 ]
             },
 

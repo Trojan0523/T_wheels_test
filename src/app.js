@@ -57,9 +57,6 @@ new Vue({
     created() {
     },
     methods: {
-        inputChange(e) {
-            console.log(e.target.value);
-        },
         showToast1() {
             this.showToast('top')
         },

@@ -23,9 +23,7 @@
             --border-color-hover: #666;
             --button-active-bg: #eee;
         }
-
         #app {}
-
         body {
             font-size: var(--font-size);
         }
@@ -36,27 +34,10 @@
             border: 1px solid #666666;
             min-height: 100px;
         }
-
-        .demo2 {
-            border: 1px solid yellowgreen;
-            min-height: 100px;
-        }
-        .sider{
-            background: #333;
-            width: 200px;
-        }
-        .header {
-            background: #999;
-            height: 100px;
-        }
-        .footer {
-            background: #ccc;
-            height: 50px;
-        }
     </style>
 </head>
 <body>
-<div id="app" style="padding: 100px; left: 100px; border: 1px solid red; overflow: hidden">
+<div id="app" style="padding: 100px;">
     <div>
         <t-collapse single :selected.sync="selectedTab">
             <t-collapse-item title="标题一" name="1">内容一</t-collapse-item>
@@ -69,7 +50,6 @@
     <div style="padding-bottom: 150px">
     <t-popover position="bottom">
         <template slot="content" slot-scope="{close}">
-
             <div>popover 内容 <t-button @click="close">关闭</t-button> </div>
         </template>
         <t-button>点赞</t-button>
@@ -120,7 +100,7 @@
         </t-popover>
     </div>
 
-    <t-tabs :selected.sync="selectedTab" position="vertical">
+    <t-tabs :selected.sync="selectedTab" position="horizontal">
         <t-tabs-head>
             <template slot="actions">
                 <t-button>设置</t-button>
@@ -150,8 +130,6 @@
 
         </t-layout>
     </div>
-
-
     <div>
         <t-row gutter="20" style="margin: 10px;">
             <t-col span="12">
@@ -205,7 +183,6 @@
         <t-input value="张三" disabled></t-input>
         <t-input value="李四" readonly></t-input>
         <t-input value="王五"></t-input>
-        <t-input value="徐七" @change="inputChange"></t-input>
     </div>
     <div class="box">
         <t-input value="神六" error="姓名不能少于两个字"></t-input>
