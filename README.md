@@ -15,10 +15,11 @@
     ```
     IE 8 及以上浏览齐都支持此样式。 
     
-    你还需要设置默认颜色等变量 (后续会改为SCSS变量)
+    你还需要设置默认颜色等变量 (后期可改为SCSS变量)
     
     ```
-    html 
+    
+     html /*HTML变量*/
             {
             --button-height: 32px;
             --font-size: 14px;
@@ -30,17 +31,29 @@
             --button-active-bg: #eee;
             }
     
+    html /*SCSS变量*/
+            {
+            $button-height: 32px;
+            $font-size: 14px;
+            $button-bg: white;
+            $border-radius: 4px;
+            $color: #333;
+            $border-color: #999;
+            $border-color-hover: #666;
+            $button-active-bg: #eee;
+            }
+    
     ```
-    IE 15 及以上浏览齐都支持此样式。 
+    IE 15 及以上浏览器都支持此样式。 
 
 2. 安装T_Wheels
     ```
-   npm i --save trojan-test-1-1
+   npm i --save t-wheels
    ```
-3. 引入trojan-test-1-1
+3. 引入t-wheels
     ```
-    import {Button, ButtonGroup, Icon} from 'trojan-test-1-1'
-    import 'trojan-test-1-1/dist/index.css'
+    import {Button, ButtonGroup, Icon} from 't-wheels'
+    import 't-wheels/dist/index.css'
    
     export default {
         name: 'app',
@@ -54,12 +67,13 @@
 
 ## 文档
 
-## 提问
+http://pukhungyu.club/T_wheels_test/
 
 ## 变更记录
 
-## 联系方式
+commit -branch里面有详细的修改记录 
+
 
 ## 贡献代码
-> 作者: 卜雄宇(Trojan)
+> author: Trojan
 
