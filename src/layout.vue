@@ -2,7 +2,6 @@
     <div class="layout" :class="layoutClass">
         <slot></slot>
     </div>
-
 </template>
 
 <script>

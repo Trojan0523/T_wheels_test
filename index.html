@@ -37,7 +37,7 @@
     </style>
 </head>
 <body>
-<div id="app" style="padding: 100px;">
+<div id="app">
     <div>
         <t-collapse single :selected.sync="selectedTab">
             <t-collapse-item title="标题一" name="1">内容一</t-collapse-item>
@@ -105,7 +105,7 @@
             <template slot="actions">
                 <t-button>设置</t-button>
             </template>
-            <t-tabs-item name="women" disabled><t-icon name="settings" ></t-icon>美女</t-tabs-item>
+            <t-tabs-item name="women"><t-icon name="settings" ></t-icon>美女</t-tabs-item>
             <t-tabs-item name="finance">财经</t-tabs-item>
             <t-tabs-item name="sports">体育</t-tabs-item>
         </t-tabs-head>
