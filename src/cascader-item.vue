@@ -71,6 +71,7 @@ export default {
   .left {
     height: 100%;
     padding: .3em 0;
+    overflow: auto;
   }
   .right {
     height: 100%;
