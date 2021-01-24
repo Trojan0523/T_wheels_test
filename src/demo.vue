@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 20px;">
     <t-cascader :source="source" popover-height="200px"
                 :selected="selected"
                 @update:selected="selected = $event"></t-cascader>
