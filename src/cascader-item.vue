@@ -2,8 +2,8 @@
   <div class="cascaderItem" :style="{height: height}">
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
-        {{ item.name }}
-        <icon class="icon" v-if="item.children" name="right"></icon>
+        <span class="name">{{ item.name }}</span>
+        <icon class="icon" v-if="rightArrowVisible(item)" name="right"></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
@@ -28,6 +28,9 @@ export default {
     height: {
       type: String,
     },
+    loadData: {
+      type: Function
+    },
     selected: {
       type: Array,
       default: () => []
@@ -45,7 +48,8 @@ export default {
           return selected[0].children;
         }
       }
-    }
+    },
+
   },
   methods: {
     onClickLabel(item) {
@@ -56,6 +60,9 @@ export default {
     },
     onUpdateSelected(newSelected) {
       this.$emit('update:selected', newSelected);
+    },
+    rightArrowVisible(item) {
+      return this.loadData ? !item.isLeaf : item.children;
     }
   },
 };
@@ -82,12 +89,23 @@ export default {
   }
 
   .label {
-    padding: .3em 1em;
+    padding: .5em 1em;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover {
+      background: $gray;
+    }
+
+    > .name {
+      margin-right: 1em;
+      user-select: none;
+    }
 
     .icon {
-      margin-left: 1em;
+      margin-left: auto;
       transform: scale(0.5);
     }
   }

@@ -1,11 +1,11 @@
 <template>
-  <div class="cascader">
-    <div class="trigger" @click="popoverVisible = !popoverVisible">
+  <div class="cascader" ref="cascader">
+    <div class="trigger" @click="toggle">
       {{ result || '&nbsp;' }}
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
       <cascader-item :items="source" class="popover" :height="popoverHeight"
-                     :selected="selected"
+                     :selected="selected" :loadData="loadData"
                      @update:selected="onUpdateSelected"></cascader-item>
     </div>
   </div>
@@ -38,6 +38,29 @@ export default {
     };
   },
   methods: {
+    onClickDocument(e) {
+      let {cascader} = this.$refs;
+      let {target} = e;
+      if (cascader === target || cascader.contains(target)) {return;}
+      this.close();
+    },
+    open() {
+      this.popoverVisible = true;
+      this.$nextTick(() => {
+        document.addEventListener('click', this.onClickDocument);
+      });
+    },
+    close() {
+      this.popoverVisible = false;
+      document.removeEventListener('click', this.onClickDocument);
+    },
+    toggle() {
+      if (this.popoverVisible === true) {
+        this.close();
+      } else {
+        this.open();
+      }
+    },
     onUpdateSelected(newSelected) {
       this.$emit('update:selected', newSelected);
       let lastItem = newSelected[newSelected.length - 1];
@@ -70,14 +93,16 @@ export default {
         }
       };
       let updateSource = (result) => {
-        let copy = JSON.parse(JSON.stringify(this.source))
+        let copy = JSON.parse(JSON.stringify(this.source));
         let toUpdate = complex(copy, lastItem.id);
-        toUpdate.children = result
+        toUpdate.children = result;
         // this.$set(toUpdate, 'children', result);
-        this.$emit('update:source', copy)
+        this.$emit('update:source', copy);
       };
-      this.loadData(lastItem, updateSource); // 回调：把别人传给我的函数调用一下
-      //  调用回调函数时候传一个函数， 这个函数理论上应该被调用
+      if (!lastItem.isLeaf) {
+        this.loadData && this.loadData(lastItem, updateSource); // 回调：把别人传给我的函数调用一下
+        //  调用回调函数时候传一个函数， 这个函数理论上应该被调用
+      }
     }
   },
   computed: {
@@ -93,6 +118,8 @@ export default {
 
 .cascader {
   position: relative;
+  border: 1px solid red;
+  display: inline-block;
 
   .trigger {
     height: $input-height;
