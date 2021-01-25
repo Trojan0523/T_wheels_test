@@ -23,7 +23,7 @@ import Button from '@/button';
 import Cascader from '@/cascader';
 import db from '@/db.js';
 import Popover from '@/popover';
-
+import {removeListener} from './click-outside';
 function ajax(parent_id = 0) {
   return new Promise((success, fail) => {
     let result = db.filter((item) => item.parent_id === parent_id);
@@ -71,6 +71,9 @@ export default {
         this.$set(lastLevelSelected, 'children', result);
       });
     }
+  },
+  destroyed() {
+    removeListener()
   }
 };
 </script>
