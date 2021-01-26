@@ -6,6 +6,7 @@
     <div class="popover-wrapper" v-if="popoverVisible">
       <cascader-item :items="source" class="popover" :height="popoverHeight"
                      :selected="selected" :loadData="loadData"
+                     :loading-items="loadingItem"
                      @update:selected="onUpdateSelected"></cascader-item>
     </div>
   </div>
@@ -14,10 +15,11 @@
 <script>
 import CascaderItem from '@/cascader-item';
 import ClickOutside from '@/click-outside';
+
 export default {
   name: 'TCascader',
   components: {CascaderItem},
-  directives:{
+  directives: {
     ClickOutside
   },
   props: {
@@ -37,7 +39,8 @@ export default {
   },
   data() {
     return {
-      popoverVisible: false
+      popoverVisible: false,
+      loadingItem: {}
     };
   },
   methods: {
@@ -54,7 +57,7 @@ export default {
         this.open();
       }
     },
-    onUpdateSelected(newSelected) {
+    onUpdateSelected: function (newSelected) {
       this.$emit('update:selected', newSelected);
       let lastItem = newSelected[newSelected.length - 1];
       let simplest = (children, id) => {
@@ -86,15 +89,17 @@ export default {
         }
       };
       let updateSource = (result) => {
+        this.loadingItem = {}
         let copy = JSON.parse(JSON.stringify(this.source));
         let toUpdate = complex(copy, lastItem.id);
         toUpdate.children = result;
         // this.$set(toUpdate, 'children', result);
         this.$emit('update:source', copy);
       };
-      if (!lastItem.isLeaf) {
-        this.loadData && this.loadData(lastItem, updateSource); // 回调：把别人传给我的函数调用一下
-        //  调用回调函数时候传一个函数， 这个函数理论上应该被调用
+      if (!lastItem.isLeaf && this.loadData) {
+          this.loadData(lastItem, updateSource); // 回调：把别人传给我的函数调用一下
+          //  调用回调函数时候传一个函数， 这个函数理论上应该被调用
+          this.loadingItem = lastItem;
       }
     }
   },
@@ -132,6 +137,7 @@ export default {
     background: white;
     display: flex;
     margin-top: 8px;
+    z-index: 1;
     @extend .box-shadow;
   }
 }

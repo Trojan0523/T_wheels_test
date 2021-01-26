@@ -6,6 +6,7 @@
                   @update:selected="xxx"
                   :load-data="loadData">
       </t-cascader>
+      {{selected.map(item => item.name)}}
     </div>
     <t-popover>
       <template>
