@@ -50,9 +50,9 @@ describe('Toast', () => {
                     enableHtml: true
                 }
             })
-            vm.$slots.default = ['<strong id="test">hi</strong>']
+            vm.$slots.default = ['<strong id="tests">hi</strong>']
             vm.$mount()
-            let strong = vm.$el.querySelector('#test')
+            let strong = vm.$el.querySelector('#tests')
             expect(strong).to.exist
         })
         it('接受 position ', function () {

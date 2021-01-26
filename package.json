@@ -7,10 +7,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "start": "parcel index.html --no-cache",
-    "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
+    "dev-test": "parcel watch tests/* --no-cache & karma start",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
