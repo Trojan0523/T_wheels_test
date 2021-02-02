@@ -1,3 +1,4 @@
+// v-directives 自定义指令使用
 let onClickDocument = ('click', (e) => {
   let {target} = e;
   callbacks.forEach((item) => {
