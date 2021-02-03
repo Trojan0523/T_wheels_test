@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  name: 'slidesItem',
   props: {
     name: {
       type: String,

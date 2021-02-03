@@ -10,18 +10,30 @@
       </div>
     </div>
     <div class="t-slides-dots">
+      <span @click="onClickPrev">
+      <t-icon name="left"></t-icon>
+      </span>
       <span v-for="(n, index) in childrenLength"
             :class="{active: selectedIndex === n -1}"
+            :key="index"
             @click="select(n-1)">
         {{ n }}
+      </span>
+      <span @click="onClickNext">
+      <t-icon name="right"></t-icon>
       </span>
     </div>
   </div>
 </template>
 
 <script>
+import icon from '@/icon';
+
 export default {
   name: 'slides',
+  components: {
+    't-icon': icon
+  },
   props: {
     selected: {
       type: String,
@@ -42,7 +54,7 @@ export default {
   mounted() {
     this.updateChildren();
     this.playAutomatically();
-    this.childrenLength = this.$children.length;
+    this.childrenLength = this.items.length;
   },
   updated() {
     this.updateChildren();
@@ -53,14 +65,17 @@ export default {
       return index === -1 ? 0 : index;
     },
     names() {
-      return this.$children.map(vm => vm.name);
+      return this.items.map(vm => vm.name);
+    },
+    items() {
+      return this.$children.filter(vm => vm.$options.name === 'slidesItem');
     }
   },
   methods: {
     onTouchStart(e) {
       this.pause();
-      this.startTouch = e.changedTouches[0];
       if (e.touches.length > 1) return;
+      this.startTouch = e.touches[0];
     },
     onTouchMove() {
     },
@@ -96,6 +111,12 @@ export default {
     onMouseLeave() {
       this.playAutomatically();
     },
+    onClickPrev(){
+      this.select(this.selectedIndex - 1)
+    },
+    onClickNext(){
+      this.select(this.selectedIndex + 1)
+    },
     playAutomatically() {
       if (this.timerId) return;
       let run = () => {
@@ -111,7 +132,7 @@ export default {
       window.clearTimeout(this.timerId);
     },
     getSelected() {
-      let first = this.$children[0];
+      let first = this.items[0];
       return this.selected || first.name;
     },
     select(newIndex) {
@@ -122,13 +143,13 @@ export default {
     },
     updateChildren() {
       let selected = this.getSelected();
-      this.$children.forEach((vm) => {
+      this.items.forEach((vm) => {
         let reverse = this.selectedIndex > this.lastSelectedIndex ? false : true;
         if (this.timerId) {
-          if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+          if (this.lastSelectedIndex === this.items.length - 1 && this.selectedIndex === 0) {
             reverse = false;
           }
-          if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+          if (this.lastSelectedIndex === 0 && this.selectedIndex === this.items.length - 1) {
             reverse = true;
           }
         }
