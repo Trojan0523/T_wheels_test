@@ -1,5 +1,9 @@
 <template>
-  <div class="t-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  <div class="t-slides" @mouseenter="onMouseEnter"
+       @mouseleave="onMouseLeave"
+       @touchstart="onTouchStart"
+       @touchmove="onTouchMove"
+       @touchend="onTouchEnd">
     <div class="t-slides-window" ref="window">
       <div class="t-slides-wrapper">
         <slot></slot>
@@ -31,7 +35,8 @@ export default {
     return {
       childrenLength: 0,
       lastSelectedIndex: undefined,
-      timerId: undefined
+      timerId: undefined,
+      startTouch: undefined,
     };
   },
   mounted() {
@@ -44,13 +49,46 @@ export default {
   },
   computed: {
     selectedIndex() {
-      return this.names.indexOf(this.selected) || 0;
+      let index = this.names.indexOf(this.selected) || 0;
+      return index === -1 ? 0 : index;
     },
     names() {
       return this.$children.map(vm => vm.name);
     }
   },
   methods: {
+    onTouchStart(e) {
+      this.pause();
+      this.startTouch = e.changedTouches[0];
+      if (e.touches.length > 1) return;
+    },
+    onTouchMove() {
+    },
+    onTouchEnd(e) {
+      let endTouch = e.changedTouches[0];
+      // 取开始触摸点坐标
+      let {clientX: x1, clientY: y1} = this.startTouch;
+      // 取结束触摸点坐标
+      let {clientX: x2, clientY: y2} = endTouch;
+      // 计算两个点夹角距离
+      // 两个点直线斜边距离
+      let distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      let deltaY = Math.abs(y2 - y1);
+      let Rate = distance / deltaY;
+      if (Rate > 2) {
+        // 在滑动
+        if (x2 > x1) {
+          // 右边滑动
+          this.select(this.selectedIndex - 1);
+        } else {
+          // 左边滑动
+          this.select(this.selectedIndex + 1);
+        }
+      }
+      this.$nextTick(() => {
+        this.playAutomatically();
+      });
+    },
     onMouseEnter() {
       this.pause();
       this.timerId = undefined;
@@ -64,8 +102,6 @@ export default {
         let index = this.names.indexOf(this.getSelected());
         // -1 倒序 +1 正序
         let newIndex = index + 1;
-        if (newIndex === -1) {newIndex = this.names.length - 1; }
-        if (newIndex === this.names.length) {newIndex = 0;}
         this.select(newIndex); // 告诉外界选中newIndex
         this.timerId = setTimeout(run, 2000);
       };
@@ -78,9 +114,11 @@ export default {
       let first = this.$children[0];
       return this.selected || first.name;
     },
-    select(index) {
+    select(newIndex) {
       this.lastSelectedIndex = this.selectedIndex;
-      this.$emit('update:selected', this.names[index]);
+      if (newIndex === -1) {newIndex = this.names.length - 1; }
+      if (newIndex === this.names.length) {newIndex = 0;}
+      this.$emit('update:selected', this.names[newIndex]);
     },
     updateChildren() {
       let selected = this.getSelected();
@@ -120,6 +158,7 @@ export default {
     justify-content: center;
     align-items: center;
     font-size: 12px;
+
     > span {
       width: 20px;
       height: 20px;
@@ -129,17 +168,19 @@ export default {
       justify-content: center;
       align-items: center;
       margin: 0 8px;
+
       &:hover {
         cursor: pointer;
       }
+
       &.active {
         background: black;
         color: white;
+
         &:hover {
           cursor: default;
         }
       }
-
     }
   }
 }
