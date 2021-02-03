@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      selected: '2',
+      selected: undefined,
     };
   },
   created() {
@@ -81,5 +81,9 @@ export default {
   width: 100%;
   height: 350px;
   background: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
 }
 </style>

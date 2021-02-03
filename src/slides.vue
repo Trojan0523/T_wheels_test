@@ -1,16 +1,15 @@
 <template>
-  <div class="t-slides">
+  <div class="t-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div class="t-slides-window" ref="window">
       <div class="t-slides-wrapper">
         <slot></slot>
       </div>
     </div>
     <div class="t-slides-dots">
-      {{ childrenLength }}
       <span v-for="(n, index) in childrenLength"
-            :key="index" :class="{active: selectedIndex === n -1}"
+            :class="{active: selectedIndex === n -1}"
             @click="select(n-1)">
-        {{ n-1 }}
+        {{ n }}
       </span>
     </div>
   </div>
@@ -31,13 +30,13 @@ export default {
   data() {
     return {
       childrenLength: 0,
-      lastSelectedIndex: undefined
+      lastSelectedIndex: undefined,
+      timerId: undefined
     };
   },
   mounted() {
     this.updateChildren();
     this.playAutomatically();
-    console.log(this.$children);
     this.childrenLength = this.$children.length;
   },
   updated() {
@@ -52,33 +51,53 @@ export default {
     }
   },
   methods: {
+    onMouseEnter() {
+      this.pause();
+      this.timerId = undefined;
+    },
+    onMouseLeave() {
+      this.playAutomatically();
+    },
     playAutomatically() {
-      let index = this.names.indexOf(this.getSelected());
+      if (this.timerId) return;
       let run = () => {
-        let newIndex = index - 1;
+        let index = this.names.indexOf(this.getSelected());
+        // -1 倒序 +1 正序
+        let newIndex = index + 1;
         if (newIndex === -1) {newIndex = this.names.length - 1; }
         if (newIndex === this.names.length) {newIndex = 0;}
-        this.select(newIndex);
-        setTimeout(run, 2000);
+        this.select(newIndex); // 告诉外界选中newIndex
+        this.timerId = setTimeout(run, 2000);
       };
-      setTimeout(run, 2000);
+      this.timerId = setTimeout(run, 2000);
+    },
+    pause() {
+      window.clearTimeout(this.timerId);
     },
     getSelected() {
       let first = this.$children[0];
       return this.selected || first.name;
     },
     select(index) {
-      this.lastSelectedIndex = this.selectedIndex
+      this.lastSelectedIndex = this.selectedIndex;
       this.$emit('update:selected', this.names[index]);
     },
     updateChildren() {
       let selected = this.getSelected();
-      console.log('selected', selected);
       this.$children.forEach((vm) => {
-        vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
+        let reverse = this.selectedIndex > this.lastSelectedIndex ? false : true;
+        if (this.timerId) {
+          if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+            reverse = false;
+          }
+          if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+            reverse = true;
+          }
+        }
+        vm.reverse = reverse;
         this.$nextTick(() => {
           vm.selected = selected;
-        })
+        });
       });
     }
   }
@@ -90,14 +109,37 @@ export default {
   &-window {
     overflow: hidden;
   }
+
   &-wrapper {
     position: relative;
   }
+
   &-dots {
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
     > span {
-      &-active {
-        background: red;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ddd;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 8px;
+      &:hover {
+        cursor: pointer;
       }
+      &.active {
+        background: black;
+        color: white;
+        &:hover {
+          cursor: default;
+        }
+      }
+
     }
   }
 }
