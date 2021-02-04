@@ -2,7 +2,6 @@
   <div class="t-slides" @mouseenter="onMouseEnter"
        @mouseleave="onMouseLeave"
        @touchstart="onTouchStart"
-       @touchmove="onTouchMove"
        @touchend="onTouchEnd">
     <div class="t-slides-window" ref="window">
       <div class="t-slides-wrapper">
@@ -15,7 +14,7 @@
       </span>
       <span v-for="(n, index) in childrenLength"
             :class="{active: selectedIndex === n -1}"
-            :key="index"
+            :key="n" :data-index="n-1"
             @click="select(n-1)">
         {{ n }}
       </span>
@@ -41,6 +40,10 @@ export default {
     autoplay: {
       type: Boolean,
       default: true
+    },
+    autoPlayDelay: {
+      type: Number,
+      default: 3000
     }
   },
   data() {
@@ -53,7 +56,9 @@ export default {
   },
   mounted() {
     this.updateChildren();
-    this.playAutomatically();
+    if(this.autoplay) {
+      this.playAutomatically();
+    }
     this.childrenLength = this.items.length;
   },
   updated() {
@@ -124,9 +129,9 @@ export default {
         // -1 倒序 +1 正序
         let newIndex = index + 1;
         this.select(newIndex); // 告诉外界选中newIndex
-        this.timerId = setTimeout(run, 2000);
+        this.timerId = setTimeout(run, this.autoPlayDelay);
       };
-      this.timerId = setTimeout(run, 2000);
+      this.timerId = setTimeout(run, this.autoPlayDelay);
     },
     pause() {
       window.clearTimeout(this.timerId);
