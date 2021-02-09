@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import slides from '@/slides';
-import slidesItem from '@/./slides-item';
+import slides from '@/slides/slides';
+import slidesItem from './slides/slides-item';
 
 // function ajax(parent_id = 0) {
 //   return new Promise((success, fail) => {

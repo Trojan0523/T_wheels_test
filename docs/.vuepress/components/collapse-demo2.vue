@@ -9,8 +9,8 @@
     </div>
 </template>
 <script>
-    import Collapse from '../../../src/collapse'
-    import CollapseItem from '../../../src/collapse-item'
+    import Collapse from '@/collapse/collapse'
+    import CollapseItem from '@/collapse/collapse-item'
     export default {
         components:{
             't-collapse': Collapse,

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CascaderItem from '@/cascader-item';
+import CascaderItem from '@/cascader/cascader-item';
 import ClickOutside from '@/click-outside';
 
 export default {
@@ -112,7 +112,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "var";
+@import "src/var";
 
 .cascader {
   position: relative;

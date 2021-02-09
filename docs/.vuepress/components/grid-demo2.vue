@@ -65,8 +65,8 @@
     }
 </style>
 <script>
-    import TRow from '../../../src/row'
-    import TCol from '../../../src/col'
+    import TRow from '@/grid/row'
+    import TCol from '@/grid/col'
     export default {
         components: {
             't-row': TRow,

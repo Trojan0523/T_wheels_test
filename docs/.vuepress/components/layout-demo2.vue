@@ -12,11 +12,11 @@
     </div>
 </template>
 <script>
-    import Layout from '../../../src/layout'
-    import Header from "../../../src/header"
-    import Content from "../../../src/content"
-    import Sider from "../../../src/sider"
-    import Footer from "../../../src/footer"
+    import Layout from '@/layout/layout'
+    import Header from "@/layout/header"
+    import Content from "@/layout/content"
+    import Sider from "@/layout/sider"
+    import Footer from "@/layout/footer"
     export default {
         components:{
             't-layout': Layout,
