@@ -17,8 +17,8 @@
     </div>
 </template>
 <script>
-    import Button from '../../../src/button'
-    import ButtonGroup from '../../../src/button-group'
+    import Button from '@/button/button'
+    import ButtonGroup from '@/button/button-group'
     export default {
         components:{
             't-button': Button,

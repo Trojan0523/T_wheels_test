@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import TButton from "../../../src/button"
+    import TButton from "@/button/button"
     import TToast from "../../../src/toast"
     import plugin from "../../../src/plugin";
     import Vue from 'vue'

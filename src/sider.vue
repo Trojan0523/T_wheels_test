@@ -9,7 +9,7 @@
 
 <script>
     import Vue from 'vue'
-    import Button from './button'
+    import Button from './button/button'
     Vue.component('t-button',Button)
     export default {
         name: 'TSider',

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Icon from './icon';
+import Icon from '../icon';
 
 export default {
   name: 'TButton',
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "_var";
+@import "src/var";
 
 @keyframes spin {
   0% {

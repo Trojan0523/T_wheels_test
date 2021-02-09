@@ -28,7 +28,7 @@
     </div>
 </template>
 <script>
-    import Button from '../../../src/button'
+    import Button from '@/button/button'
     import Popover from '../../../src/popover'
     export default {
         components:{
