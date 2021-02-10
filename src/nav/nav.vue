@@ -1,0 +1,63 @@
+<template>
+  <div class="t-nav">
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 't-nav',
+  props: {
+    selected: {
+      type: Array,
+      default: () => []
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    }
+  },
+  mounted() {
+    this.updateChildren();
+    this.listenToChildren();
+  },
+  updated() {
+    this.updateChildren();
+  },
+  computed: {
+    items() {
+      return this.$children.filter(vm => vm.$options.name === 't-nav-item');
+    }
+  },
+  methods: {
+    updateChildren() {
+      this.items.forEach(vm => {
+        vm.selected = this.selected.indexOf(vm.name) >= 0 ? true : false;
+      });
+    },
+    listenToChildren() {
+      this.items.forEach(vm => {
+        vm.$on('add:selected', (name) => {
+          if (this.multiple) {
+            console.log(name);
+            if (this.selected.indexOf(name) < 0) {
+              let copy = JSON.parse(JSON.stringify(this.selected));
+              copy.push(name);
+              this.$emit('update:selected', copy);
+            }
+          } else {
+            this.$emit('update:selected', [name]);
+          }
+        });
+      });
+
+    }
+  },
+};
+</script>
+<style lang="scss" scoped>
+.t-nav {
+  display: flex;
+  border: 1px solid red;
+}
+</style>

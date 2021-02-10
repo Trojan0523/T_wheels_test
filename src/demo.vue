@@ -1,25 +1,34 @@
 <template>
   <div>
-    <t-slides class="wrapper" width="200px" height="300px" :selected.sync="selected">
-      <t-slides-item name="1">
-        <div class="box">1</div>
-      </t-slides-item>
+    <!--    <t-slides class="wrapper" width="200px" height="300px" :selected.sync="selected">-->
+    <!--      <t-slides-item name="1">-->
+    <!--        <div class="box">1</div>-->
+    <!--      </t-slides-item>-->
 
-      <t-slides-item name="2">
-        <div class="box">2</div>
-      </t-slides-item>
+    <!--      <t-slides-item name="2">-->
+    <!--        <div class="box">2</div>-->
+    <!--      </t-slides-item>-->
 
-      <t-slides-item name="3">
-        <div class="box">3</div>
-      </t-slides-item>
+    <!--      <t-slides-item name="3">-->
+    <!--        <div class="box">3</div>-->
+    <!--      </t-slides-item>-->
 
-    </t-slides>
+    <!--    </t-slides>-->
+    <t-nav :selected.sync="selected" :multiple="false">
+      <t-nav-item name="home">首页</t-nav-item>
+      <t-nav-item name="hire">招聘</t-nav-item>
+      <t-nav-item name="about">关于</t-nav-item>
+    </t-nav>
   </div>
+
 </template>
 
 <script>
-import slides from '@/slides/slides';
-import slidesItem from './slides/slides-item';
+// import slides from '@/slides/slides';
+// import slidesItem from './slides/slides-item';
+import nav from '@/nav/nav';
+import subnav from '@/nav/sub-nav';
+import navItem from '@/nav/nav-item';
 
 // function ajax(parent_id = 0) {
 //   return new Promise((success, fail) => {
@@ -40,15 +49,16 @@ import slidesItem from './slides/slides-item';
 export default {
   name: 'demo',
   components: {
-    't-slides': slides,
-    't-slides-item': slidesItem
+    // 't-slides': slides,
+    // 't-slides-item': slidesItem
+    't-nav': nav,
+    't-sub-nav': subnav,
+    't-nav-item': navItem
   },
   data() {
     return {
-      selected: undefined,
+      selected: ['home'],
     };
-  },
-  created() {
   },
   mounted() {
     // ajax(0).then(result => {
@@ -73,17 +83,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-* {margin: 0; padding: 0; box-sizing: border-box;}
-.wrapper {
-  margin: 40px;
-}
-.box {
-  width: 100%;
-  height: 350px;
-  background: #ddd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 </style>
