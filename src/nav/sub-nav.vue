@@ -26,6 +26,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "var";
 .t-sub-nav {
   position: relative;
   >span {
@@ -34,11 +35,17 @@ export default {
     vertical-align: top;
   }
   &-popover {
+    background: white;
     position: absolute;
     top:100%;
     left: 0;
-    border: 1px solid red;
+    margin-top: 4px;
     white-space: nowrap;
+    box-shadow: 0 0 0 2px fade-out(black, 0.8) ;
+    border-radius: $border-radius;
+    font-size: $font-size;
+    color: $light-color;
+    min-width: 8em;
   }
 }
   .t-sub-nav .t-sub-nav .t-sub-nav-popover {

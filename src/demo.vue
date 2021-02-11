@@ -27,7 +27,7 @@
               <template slot="title">联系方式</template>
               <t-nav-item name="wechat">微信</t-nav-item>
               <t-nav-item name="QQ">QQ</t-nav-item>
-              <t-nav-item name="phone">phone</t-nav-item>
+              <t-nav-item name="telephone">phone</t-nav-item>
                 <t-sub-nav>
                   <template slot="title">手机</template>
                   <t-nav-item name="cb">移动</t-nav-item>
