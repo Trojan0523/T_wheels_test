@@ -48,7 +48,6 @@ export default {
       this.items.forEach(vm => {
         vm.$on('add:selected', (name) => {
           if (this.multiple) {
-            console.log(name);
             if (this.selected.indexOf(name) < 0) {
               let copy = JSON.parse(JSON.stringify(this.selected));
               copy.push(name);
