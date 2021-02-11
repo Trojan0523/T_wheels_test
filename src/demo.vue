@@ -16,6 +16,28 @@
     <!--    </t-slides>-->
     <t-nav :selected.sync="selected" :multiple="false">
       <t-nav-item name="home">首页</t-nav-item>
+      <t-sub-nav>
+        <template slot="title">关于</template>
+        <template>
+          <slot name="popover">
+            <t-nav-item name="team">开发团队</t-nav-item>
+            <t-nav-item name="culture">企业文化</t-nav-item>
+            <t-nav-item name="phone">联系电话</t-nav-item>
+            <t-sub-nav>
+              <template slot="title">联系方式</template>
+              <t-nav-item name="wechat">微信</t-nav-item>
+              <t-nav-item name="QQ">QQ</t-nav-item>
+              <t-nav-item name="phone">phone</t-nav-item>
+                <t-sub-nav>
+                  <template slot="title">手机</template>
+                  <t-nav-item name="cb">移动</t-nav-item>
+                  <t-nav-item name="cu">联通</t-nav-item>
+                  <t-nav-item name="cc">电信</t-nav-item>
+                </t-sub-nav>
+            </t-sub-nav>
+          </slot>
+        </template>
+      </t-sub-nav>
       <t-nav-item name="hire">招聘</t-nav-item>
       <t-nav-item name="about">关于</t-nav-item>
     </t-nav>
@@ -57,7 +79,7 @@ export default {
   },
   data() {
     return {
-      selected: ['home'],
+      selected: ['culture'],
     };
   },
   mounted() {

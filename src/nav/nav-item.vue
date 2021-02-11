@@ -13,6 +13,11 @@ export default {
       required: true
     }
   },
+  inject: ['root'],
+  created() {
+    this.root.addItem(this) // 如果被选中，就通知父级组件
+
+  },
   data () {
     return {
       selected: false

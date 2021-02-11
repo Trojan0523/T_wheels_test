@@ -7,6 +7,16 @@
 <script>
 export default {
   name: 't-nav',
+  provide() {
+    return {
+      root: this
+    }
+  },
+  data() {
+    return {
+      items: []
+    }
+  },
   props: {
     selected: {
       type: Array,
@@ -18,18 +28,17 @@ export default {
     }
   },
   mounted() {
+    console.log(this.items);
     this.updateChildren();
     this.listenToChildren();
   },
   updated() {
     this.updateChildren();
   },
-  computed: {
-    items() {
-      return this.$children.filter(vm => vm.$options.name === 't-nav-item');
-    }
-  },
   methods: {
+    addItem(vm) {
+      this.items.push(vm)
+    },
     updateChildren() {
       this.items.forEach(vm => {
         vm.selected = this.selected.indexOf(vm.name) >= 0 ? true : false;
