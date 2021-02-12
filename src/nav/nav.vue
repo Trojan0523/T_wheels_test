@@ -1,5 +1,5 @@
 <template>
-  <div class="t-nav">
+  <div class="t-nav" :class="{vertical}">
     <slot></slot>
   </div>
 </template>
@@ -9,12 +9,14 @@ export default {
   name: 't-nav',
   provide() {
     return {
-      root: this
+      root: this,
+      vertical: this.vertical
     }
   },
   data() {
     return {
-      items: []
+      items: [],
+      namePath: []
     }
   },
   props: {
@@ -25,10 +27,13 @@ export default {
     multiple: {
       type: Boolean,
       default: false
+    },
+    vertical: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
-    console.log(this.items);
     this.updateChildren();
     this.listenToChildren();
   },
@@ -70,5 +75,10 @@ export default {
   border-bottom: 1px solid $gray;
   color: $color;
   cursor: default;
+  user-select: none;
+  &.vertical {
+    flex-direction: column;
+    border: 1px solid $gray;
+  }
 }
 </style>

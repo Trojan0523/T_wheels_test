@@ -25,6 +25,8 @@ export default {
   },
   methods: {
     onClick() {
+      this.root.namePath = []
+      this.$parent.updateNamePath && this.$parent.updateNamePath() // 另外一种组件通信方式， 子组件调用通知父组件
       this.$emit('add:selected', this.name)
     }
   }
@@ -36,10 +38,10 @@ export default {
   padding: 10px 20px;
   position: relative;
   &.selected {
-      border-bottom: 2px solid $blue;
     &::after {
       content: '';
       position: absolute;
+      border-bottom: 2px solid $blue;
       bottom: 0;
       left: 0;
       width: 100%;
