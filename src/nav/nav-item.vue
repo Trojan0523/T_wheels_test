@@ -27,7 +27,7 @@ export default {
     onClick() {
       this.root.namePath = [];
       this.$parent.updateNamePath && this.$parent.updateNamePath(); // 另外一种组件通信方式， 子组件调用通知父组件
-      this.$emit('add:selected', this.name);
+      this.$emit('update:selected', this.name);
     }
   }
 };

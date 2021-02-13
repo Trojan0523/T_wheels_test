@@ -11,22 +11,17 @@ export default {
     return {
       root: this,
       vertical: this.vertical
-    }
+    };
   },
   data() {
     return {
       items: [],
       namePath: []
-    }
+    };
   },
   props: {
     selected: {
-      type: Array,
-      default: () => []
-    },
-    multiple: {
-      type: Boolean,
-      default: false
+      type: String
     },
     vertical: {
       type: Boolean,
@@ -42,25 +37,17 @@ export default {
   },
   methods: {
     addItem(vm) {
-      this.items.push(vm)
+      this.items.push(vm);
     },
     updateChildren() {
       this.items.forEach(vm => {
-        vm.selected = this.selected.indexOf(vm.name) >= 0 ? true : false;
+        vm.selected = this.selected === vm.name  ? true : false;
       });
     },
     listenToChildren() {
       this.items.forEach(vm => {
-        vm.$on('add:selected', (name) => {
-          if (this.multiple) {
-            if (this.selected.indexOf(name) < 0) {
-              let copy = JSON.parse(JSON.stringify(this.selected));
-              copy.push(name);
-              this.$emit('update:selected', copy);
-            }
-          } else {
-            this.$emit('update:selected', [name]);
-          }
+        vm.$on('update:selected', (name) => {
+          this.$emit('update:selected', name);
         });
       });
 
@@ -70,12 +57,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "var";
+
 .t-nav {
   display: flex;
   border-bottom: 1px solid $gray;
   color: $color;
   cursor: default;
   user-select: none;
+
   &.vertical {
     flex-direction: column;
     border: 1px solid $gray;

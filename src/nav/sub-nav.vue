@@ -6,8 +6,8 @@
         <t-icon name="right"></t-icon>
       </span>
     </span>
-    <template v-if="vertical">
-    <transition name="x" @enter="enter" @leave="leave"
+    <template v-if="this.vertical">
+    <transition @enter="enter" @leave="leave"
                 @after-leave="afterLeave" @after-enter="afterEnter">
       <div class="t-sub-nav-popover" :class="{vertical}" v-show="open">
         <slot></slot>
@@ -53,7 +53,7 @@ export default {
     enter(el, done) {
       el.style.height = 'auto'
       let {height} = el.getBoundingClientRect();
-      console.log(height); // 进来前钩子手动设置成auto，能获取高度
+      // console.log(height); // 进来前钩子手动设置成auto，能获取高度
       el.style.height = '0px'
       el.getBoundingClientRect() // 这里是会激活操作dom的，所以获取计算值要触发cssom渲染
       el.style.height = `${height}px`; // 直接赋值修改会合并，不做css渲染
@@ -81,6 +81,7 @@ export default {
     },
     onClick() {
       this.open = !this.open;
+      console.log(this.open); // TODO: 排查问题处
     },
     updateNamePath() {
       this.active = true;
@@ -148,7 +149,6 @@ export default {
 .t-sub-nav .t-sub-nav {
   &.active {
     &::after {
-      display: none;
     }
   }
 
