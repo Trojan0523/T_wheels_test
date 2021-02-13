@@ -1,17 +1,24 @@
 <template>
-  <div class="t-sub-nav" :class="{active}" v-click-outside="close">
+  <div class="t-sub-nav" :class="{active, vertical}" v-click-outside="close">
     <span class="t-sub-nav-label" @click="onClick">
       <slot name="title"></slot>
-      <span class="t-sub-nav-icon" :class="{open}">
+      <span class="t-sub-nav-icon" :class="{open, vertical}">
         <t-icon name="right"></t-icon>
       </span>
     </span>
+    <template v-if="vertical">
     <transition name="x" @enter="enter" @leave="leave"
                 @after-leave="afterLeave" @after-enter="afterEnter">
       <div class="t-sub-nav-popover" :class="{vertical}" v-show="open">
         <slot></slot>
       </div>
     </transition>
+    </template>
+    <template v-else>
+      <div class="t-sub-nav-popover" v-show="open">
+        <slot></slot>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -25,9 +32,7 @@ export default {
     't-icon': Icon
   },
   inject: ['root', 'vertical'],
-  directives: {
-    ClickOutside
-  },
+  directives: {ClickOutside},
   data() {
     return {
       open: false,
@@ -94,18 +99,18 @@ export default {
 
 .t-sub-nav {
   position: relative;
-
-  &.active {
-    &::after {
-      content: '';
-      position: absolute;
-      border-bottom: 2px solid $blue;
-      bottom: 0;
-      left: 0;
-      width: 100%;
+  &:not(.vertical) {
+    &.active {
+      &::after {
+        content: '';
+        position: absolute;
+        border-bottom: 2px solid $blue;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
     }
   }
-
   &-icon {
     display: none;
   }
@@ -128,13 +133,13 @@ export default {
     font-size: $font-size;
     color: $light-color;
     min-width: 8em;
-
+    transition: height .25s linear;
+    overflow: hidden;
     &.vertical {
       position: static;
       border-radius: 0;
       border: none;
       box-shadow: none;
-      transition: height .25s linear;
       overflow: hidden;
     }
   }
@@ -167,7 +172,12 @@ export default {
     svg {
       fill: $gray;
     }
-
+    &.vertical {
+      transform: rotate(90deg);
+      &.open {
+        transform: rotate(270deg);
+      }
+    }
     &.open {
       transform: rotate(180deg);
     }

@@ -41,8 +41,10 @@
       <t-nav-item name="hire">招聘</t-nav-item>
       <t-nav-item name="about">关于</t-nav-item>
     </t-nav>
-    <t-nav :selected.sync="selected">
-      <t-nav-item name="home">首页</t-nav-item>
+    <t-nav :selected.sync="selected" style="margin-top: 200px;">
+      <t-nav-item name="home">
+        <a href="https://jirengu.com" target="_blank">首页</a>
+      </t-nav-item>
       <t-sub-nav name="about">
         <template slot="title">关于</template>
         <template>
