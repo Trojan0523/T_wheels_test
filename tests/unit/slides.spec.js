@@ -10,7 +10,7 @@ import SlidesItem from '@/slides/slides-item.vue';
 import Vue from 'vue';
 
 describe('slides-item.vue', () => {
-  xit('存在.', () => {
+  it('存在.', () => {
     expect(SlidesItem).to.exist;
   });
   xit('接受TSlidesItem', (done) => {
@@ -100,6 +100,6 @@ describe('slides-item.vue', () => {
       done()
     }, 510)
   })
-  xit('可以点击上一张', () => {})
-  xit('可以点击下一张', ()=> {})
+  it('可以点击上一张', () => {})
+  it('可以点击下一张', ()=> {})
   });

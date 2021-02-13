@@ -9,11 +9,11 @@ import NavItem from '@/nav/nav-item.vue';
 import SubNav from '@/nav/sub-nav.vue';
 import Vue from 'vue';
 
-describe('Button.vue', () => {
-  xit('存在.', () => {
+describe('Nav', () => {
+  it('存在.', () => {
     expect(Nav).to.exist;
   });
-  xit('支持Selected存在', (done) => {
+  it('支持Selected存在', (done) => {
     Vue.component('t-nav-item', NavItem);
     Vue.component('t-sub-nav', SubNav);
     const wrapper = mount(Nav, {
@@ -37,7 +37,7 @@ describe('Button.vue', () => {
       done()
     }, 0)
   });
-  xit('会触发update:selected事件', (done) => {
+  it('会触发update:selected事件', (done) => {
     const callback = sinon.fake()
     Vue.component('t-nav-item', NavItem);
     Vue.component('t-sub-nav', SubNav);
