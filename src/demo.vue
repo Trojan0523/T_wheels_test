@@ -68,7 +68,7 @@
       <t-nav-item name="hire">招聘</t-nav-item>
       <t-nav-item name="about">关于</t-nav-item>
     </t-nav>
-    <t-pager :total-page="20" :current-page="20"></t-pager>
+    <t-pager :total-page="10" :current-page.sync="currentPage"></t-pager>
   </div>
 </template>
 
@@ -109,6 +109,7 @@ export default {
   data() {
     return {
       selected: 'home',
+      currentPage: 1
     };
   },
   mounted() {

@@ -1,6 +1,6 @@
 <template>
-  <div class="t-pager">
-    <span class="t-pager-nav prev" :class="{disabled: currentPage === 1}">
+  <div class="t-pager" :class="{hide: hideIfOnePage === true && totalPage <= 1}">
+    <span class="t-pager-nav prev" :class="{disabled: currentPage === 1}" @click="onClickPage(currentPage -1)">
       <t-icon name="left"></t-icon>
     </span>
     <template class="t-pager-item" v-for="page in pages">
@@ -11,11 +11,11 @@
         <t-icon class="t-pager-separator" name="omit"></t-icon>
       </template>
       <template v-else>
-        <span class="t-pager-item other">{{ page }}</span>
+        <span class="t-pager-item other" @click="onClickPage(page)">{{ page }}</span>
       </template>
     </template>
-    <span class="t-pager-nav next" :class="{disabled: currentPage === totalPage}">
-      <t-icon name="right" ></t-icon>
+    <span class="t-pager-nav next" :class="{disabled: currentPage === totalPage}" @click="onClickPage(currentPage +1)">
+      <t-icon name="right"></t-icon>
     </span>
   </div>
 </template>
@@ -42,8 +42,9 @@ export default {
       default: true
     }
   },
-  data() {
-    let u2 = unique([1, this.totalPage,
+  computed: {
+    pages() {
+      return unique([1, this.totalPage,
       this.currentPage, this.currentPage - 1,
       this.currentPage + 1, this.currentPage + 2]
         .filter((n) => n >= 1 && n <= this.totalPage)
@@ -53,9 +54,15 @@ export default {
           array[index + 1] !== undefined && array[index + 1] - array[index] > 1 && prev.push('...');
           return prev;
         }, []);
-    return {
-      pages: u2
-    };
+    }
+  },
+  methods: {
+    onClickPage(n) {
+      if (n >= 1 && n <= this.totalPage) {
+        this.$emit('update:currentPage', n);
+        console.log(this.currentPage);
+      }
+    }
   }
 };
 
@@ -71,17 +78,23 @@ function unique(array) {
 
 <style lang="scss" scoped>
 @import "var";
-  $width: 20px;
-  $height: 20px;
-  $font-size: 12px;
+
+$width: 20px;
+$height: 20px;
+$font-size: 12px;
 .t-pager {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  user-select: none;
+  &.hide {
+    display: none;
+  }
   &-separator {
     width: $width;
     font-size: $font-size;
   }
+
   &-item {
     border: 1px solid $gray;
     border-radius: $border-radius;
@@ -103,6 +116,7 @@ function unique(array) {
       cursor: default;
     }
   }
+
   &-nav {
     margin: 0 4px;
     display: inline-flex;
@@ -113,7 +127,9 @@ function unique(array) {
     width: $width;
     border-radius: $border-radius;
     font-size: $font-size;
+    cursor: pointer;
     &.disabled {
+      cursor: default;
       svg {
         fill: darken($gray, 30%);
       }
