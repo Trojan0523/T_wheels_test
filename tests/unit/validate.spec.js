@@ -19,7 +19,6 @@ describe('validate', () => {
     ];
     let validator = new Validator()
     let errors = validator.validate(data, rules);
-    console.log(errors);
     expect(errors.email.required).to.eq('必填');
   });
   it('required：true通过', () => {
