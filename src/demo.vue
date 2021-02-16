@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin: 20px;">
     <!--    <t-slides class="wrapper" width="200px" height="300px" :selected.sync="selected">-->
     <!--      <t-slides-item name="1">-->
     <!--        <div class="box">1</div>-->
@@ -69,6 +69,7 @@
       <t-nav-item name="about">关于</t-nav-item>
     </t-nav>
     <p style="margin-top: 250px;">用户选中了{{ selected }}</p>
+    <t-pager :total-page="20" :current-page="3"></t-pager>
   </div>
 </template>
 
@@ -78,6 +79,7 @@
 import nav from '@/nav/nav';
 import subnav from '@/nav/sub-nav';
 import navItem from '@/nav/nav-item';
+import pager from '@/pager';
 
 // function ajax(parent_id = 0) {
 //   return new Promise((success, fail) => {
@@ -102,7 +104,8 @@ export default {
     // 't-slides-item': slidesItem
     't-nav': nav,
     't-sub-nav': subnav,
-    't-nav-item': navItem
+    't-nav-item': navItem,
+    't-pager': pager
   },
   data() {
     return {
@@ -149,5 +152,8 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  background: #888;
 }
 </style>
