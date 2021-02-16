@@ -15,7 +15,7 @@
     </transition>
     </template>
     <template v-else>
-      <div class="t-sub-nav-popover" v-show="open">
+      <div class="t-sub-nav-popover" v-show="this.open">
         <slot></slot>
       </div>
     </template>
@@ -27,7 +27,7 @@ import ClickOutside from '@/click-outside';
 import Icon from '../icon';
 
 export default {
-  name: 't-sub-nav',
+  name: 'TSubNav',
   components: {
     't-icon': Icon
   },
@@ -45,8 +45,13 @@ export default {
     }
   },
   computed: {
-    active() {
-      return this.root.namePath.indexOf(this.name) >= 0 ? true : false;
+    active: {
+      get() {
+        return this.root.namePath.indexOf(this.name) >= 0;
+      },
+      set() {
+        return this.root.namePath.indexOf(this.name) >= 0;
+      }
     }
   },
   methods: {
@@ -80,8 +85,9 @@ export default {
       this.open = false;
     },
     onClick() {
+      console.log(this.open);
       this.open = !this.open;
-      console.log(this.open); // TODO: 排查问题处
+      console.log('open',this.open); // TODO: 排查问题处
     },
     updateNamePath() {
       this.active = true;

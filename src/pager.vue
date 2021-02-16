@@ -60,7 +60,6 @@ export default {
     onClickPage(n) {
       if (n >= 1 && n <= this.totalPage) {
         this.$emit('update:currentPage', n);
-        console.log(this.currentPage);
       }
     }
   }

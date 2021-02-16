@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 't-nav',
+  name: 'TNav',
   provide() {
     return {
       root: this,

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 't-nav-item',
+  name: 'TNavItem',
   props: {
     name: {
       type: String,

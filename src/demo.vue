@@ -43,7 +43,7 @@
     </t-nav>
     <t-nav :selected.sync="selected" style="margin: 100px 0;" @update:selected="onChange">
       <t-nav-item name="home">首页</t-nav-item>
-      <t-sub-nav name="about1">
+      <t-sub-nav name="about">
         <template slot="title">关于</template>
         <template>
           <slot name="popover">
@@ -68,7 +68,7 @@
       <t-nav-item name="hire">招聘</t-nav-item>
       <t-nav-item name="about">关于</t-nav-item>
     </t-nav>
-    <t-pager :total-page="20" :current-page.sync="currentPage"></t-pager>
+    <t-pager :total-page="20" :current-page.sync="currentPage" style="margin-top:500px;"></t-pager>
   </div>
 </template>
 
@@ -120,18 +120,7 @@ export default {
   },
   methods: {
     onChange(selected) {
-      console.log(selected);
-      if (selected ==='home') {
-        alert('hi');
-      }
     },
-    watch: {
-      selected(newValue) {
-        if (newValue === 'home') {
-          console.log('hi');
-        }
-      }
-    }
     // loadData({id}, updateSource) {
     //   ajax(id).then(result => {
     //     updateSource(result); // 回调：把别人传给我的函数调用一下

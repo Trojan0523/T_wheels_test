@@ -40,7 +40,7 @@ describe('Pager', () => {
       wrapper.find('.next').trigger('click')
       expect(callback).to.have.been.calledWith(3)
       done()
-    },500)
+    },100)
   })
   it('点击上一页可以跳转上一页', (done) => {
     const callback = sinon.fake()
@@ -57,6 +57,6 @@ describe('Pager', () => {
       wrapper.find('.prev').trigger('click')
       expect(callback).to.have.been.calledWith(1)
       done()
-    },500)
+    },100)
   })
 })
