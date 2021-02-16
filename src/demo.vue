@@ -41,7 +41,7 @@
       <t-nav-item name="hire">招聘</t-nav-item>
       <t-nav-item name="about">关于</t-nav-item>
     </t-nav>
-    <t-nav :selected.sync="selected" style="margin-top: 200px;" @update:selected="onChange">
+    <t-nav :selected.sync="selected" style="margin: 100px 0;" @update:selected="onChange">
       <t-nav-item name="home">首页</t-nav-item>
       <t-sub-nav name="about1">
         <template slot="title">关于</template>
@@ -68,8 +68,7 @@
       <t-nav-item name="hire">招聘</t-nav-item>
       <t-nav-item name="about">关于</t-nav-item>
     </t-nav>
-    <p style="margin-top: 250px;">用户选中了{{ selected }}</p>
-    <t-pager :total-page="20" :current-page="3"></t-pager>
+    <t-pager :total-page="20" :current-page="20"></t-pager>
   </div>
 </template>
 
