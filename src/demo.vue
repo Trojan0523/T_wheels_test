@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 20px;">
+  <div>
     <!--    <t-slides class="wrapper" width="200px" height="300px" :selected.sync="selected">-->
     <!--      <t-slides-item name="1">-->
     <!--        <div class="box">1</div>-->
@@ -14,61 +14,111 @@
     <!--      </t-slides-item>-->
 
     <!--    </t-slides>-->
-    <t-nav :selected.sync="selected" vertical style="width: 200px; margin: 20px;">
-      <t-nav-item name="home">首页</t-nav-item>
-      <t-sub-nav name="about">
-        <template slot="title">关于</template>
-        <template>
-          <slot name="popover">
-            <t-nav-item name="team">开发团队</t-nav-item>
-            <t-nav-item name="culture">企业文化</t-nav-item>
-            <t-nav-item name="phone">联系电话</t-nav-item>
-            <t-sub-nav name="contacts">
-              <template slot="title">联系方式</template>
-              <t-nav-item name="wechat">微信</t-nav-item>
-              <t-nav-item name="QQ">QQ</t-nav-item>
-              <t-nav-item name="telephone">phone</t-nav-item>
-              <t-sub-nav name="phone">
-                <template slot="title">手机</template>
-                <t-nav-item name="cb">移动</t-nav-item>
-                <t-nav-item name="cu">联通</t-nav-item>
-                <t-nav-item name="cc">电信</t-nav-item>
-              </t-sub-nav>
-            </t-sub-nav>
-          </slot>
-        </template>
-      </t-sub-nav>
-      <t-nav-item name="hire">招聘</t-nav-item>
-      <t-nav-item name="about">关于</t-nav-item>
-    </t-nav>
-    <t-nav :selected.sync="selected" style="margin: 100px 0;" @update:selected="onChange">
-      <t-nav-item name="home">首页</t-nav-item>
-      <t-sub-nav name="about">
-        <template slot="title">关于</template>
-        <template>
-          <slot name="popover">
-            <t-nav-item name="team">开发团队</t-nav-item>
-            <t-nav-item name="culture">企业文化</t-nav-item>
-            <t-nav-item name="phone">联系电话</t-nav-item>
-            <t-sub-nav name="contacts">
-              <template slot="title">联系方式</template>
-              <t-nav-item name="wechat">微信</t-nav-item>
-              <t-nav-item name="QQ">QQ</t-nav-item>
-              <t-nav-item name="telephone">phone</t-nav-item>
-              <t-sub-nav name="phone">
-                <template slot="title">手机</template>
-                <t-nav-item name="cb">移动</t-nav-item>
-                <t-nav-item name="cu">联通</t-nav-item>
-                <t-nav-item name="cc">电信</t-nav-item>
-              </t-sub-nav>
-            </t-sub-nav>
-          </slot>
-        </template>
-      </t-sub-nav>
-      <t-nav-item name="hire">招聘</t-nav-item>
-      <t-nav-item name="about">关于</t-nav-item>
-    </t-nav>
-    <t-pager :total-page="20" :current-page.sync="currentPage" style="margin-top:500px;"></t-pager>
+<!--    <t-nav :selected.sync="selected" vertical style="width: 200px; margin: 20px;">-->
+<!--      <t-nav-item name="home">首页</t-nav-item>-->
+<!--      <t-sub-nav name="about">-->
+<!--        <template slot="title">关于</template>-->
+<!--        <template>-->
+<!--          <slot name="popover">-->
+<!--            <t-nav-item name="team">开发团队</t-nav-item>-->
+<!--            <t-nav-item name="culture">企业文化</t-nav-item>-->
+<!--            <t-nav-item name="phone">联系电话</t-nav-item>-->
+<!--            <t-sub-nav name="contacts">-->
+<!--              <template slot="title">联系方式</template>-->
+<!--              <t-nav-item name="wechat">微信</t-nav-item>-->
+<!--              <t-nav-item name="QQ">QQ</t-nav-item>-->
+<!--              <t-nav-item name="telephone">phone</t-nav-item>-->
+<!--              <t-sub-nav name="phone">-->
+<!--                <template slot="title">手机</template>-->
+<!--                <t-nav-item name="cb">移动</t-nav-item>-->
+<!--                <t-nav-item name="cu">联通</t-nav-item>-->
+<!--                <t-nav-item name="cc">电信</t-nav-item>-->
+<!--              </t-sub-nav>-->
+<!--            </t-sub-nav>-->
+<!--          </slot>-->
+<!--        </template>-->
+<!--      </t-sub-nav>-->
+<!--      <t-nav-item name="hire">招聘</t-nav-item>-->
+<!--      <t-nav-item name="about">关于</t-nav-item>-->
+<!--    </t-nav>-->
+<!--    <t-nav :selected.sync="selected" style="margin: 100px 0;" @update:selected="onChange">-->
+<!--      <t-nav-item name="home">首页</t-nav-item>-->
+<!--      <t-sub-nav name="about">-->
+<!--        <template slot="title">关于</template>-->
+<!--        <template>-->
+<!--          <slot name="popover">-->
+<!--            <t-nav-item name="team">开发团队</t-nav-item>-->
+<!--            <t-nav-item name="culture">企业文化</t-nav-item>-->
+<!--            <t-nav-item name="phone">联系电话</t-nav-item>-->
+<!--            <t-sub-nav name="contacts">-->
+<!--              <template slot="title">联系方式</template>-->
+<!--              <t-nav-item name="wechat">微信</t-nav-item>-->
+<!--              <t-nav-item name="QQ">QQ</t-nav-item>-->
+<!--              <t-nav-item name="telephone">phone</t-nav-item>-->
+<!--              <t-sub-nav name="phone">-->
+<!--                <template slot="title">手机</template>-->
+<!--                <t-nav-item name="cb">移动</t-nav-item>-->
+<!--                <t-nav-item name="cu">联通</t-nav-item>-->
+<!--                <t-nav-item name="cc">电信</t-nav-item>-->
+<!--              </t-sub-nav>-->
+<!--            </t-sub-nav>-->
+<!--          </slot>-->
+<!--        </template>-->
+<!--      </t-sub-nav>-->
+<!--      <t-nav-item name="hire">招聘</t-nav-item>-->
+<!--      <t-nav-item name="about">关于</t-nav-item>-->
+<!--    </t-nav>-->
+<!--    <t-pager :total-page="20" :current-page.sync="currentPage" style="margin-top:500px;"></t-pager>-->
+
+    <t-sticky>
+      <div style="border: 1px solid gray">我是贴纸内容</div>
+    </t-sticky>
+    <p>段落89</p>
+    <p>段落90</p>
+    <p>段落91</p>
+    <p>段落92</p>
+    <p>段落93</p>
+    <p>段落94</p>
+    <p>段落95</p>
+    <p>段落96</p>
+    <p>段落97</p>
+    <p>段落98</p>
+    <p>段落99</p>
+    <p>段落100</p>
+    <p>段落89</p>
+    <p>段落90</p>
+    <p>段落91</p>
+    <p>段落92</p>
+    <p>段落93</p>
+    <p>段落94</p>
+    <p>段落95</p>
+    <p>段落96</p>
+    <p>段落97</p>
+    <p>段落98</p>
+    <p>段落99</p>
+    <p>段落100</p><p>段落89</p>
+    <p>段落90</p>
+    <p>段落91</p>
+    <p>段落92</p>
+    <p>段落93</p>
+    <p>段落94</p>
+    <p>段落95</p>
+    <p>段落96</p>
+    <p>段落97</p>
+    <p>段落98</p>
+    <p>段落99</p>
+    <p>段落100</p><p>段落89</p>
+    <p>段落90</p>
+    <p>段落91</p>
+    <p>段落92</p>
+    <p>段落93</p>
+    <p>段落94</p>
+    <p>段落95</p>
+    <p>段落96</p>
+    <p>段落97</p>
+    <p>段落98</p>
+    <p>段落99</p>
+    <p>段落100</p>
   </div>
 </template>
 
@@ -79,7 +129,7 @@ import nav from '@/nav/nav';
 import subnav from '@/nav/sub-nav';
 import navItem from '@/nav/nav-item';
 import pager from '@/pager';
-
+import sticky from '@/sticky';
 // function ajax(parent_id = 0) {
 //   return new Promise((success, fail) => {
 //     let result = db.filter((item) => item.parent_id === parent_id);
@@ -104,7 +154,8 @@ export default {
     't-nav': nav,
     't-sub-nav': subnav,
     't-nav-item': navItem,
-    't-pager': pager
+    't-pager': pager,
+    't-sticky': sticky
   },
   data() {
     return {
