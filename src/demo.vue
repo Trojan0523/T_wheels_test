@@ -75,7 +75,7 @@
     </t-sticky>
     <div style="margin: 20px;">
       <t-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"
-               :order-by.sync="orderBy" @update:order-by="x" :loading="loading"></t-table>
+               :order-by.sync="orderBy" @update:orderBy="x" :loading="loading" height="400px"></t-table>
       <t-pager :total-page="20" :current-page.sync="currentPage" style="margin:20px; "></t-pager>
     </div>
     <div style="margin: 20px;">
@@ -141,7 +141,20 @@ export default {
         {id: 4, name: '恩恩', score: 80},
         {id: 5, name: '白白', score: 75},
         {id: 6, name: '邓邓', score: 70},
-
+        {id: 7, name: '方方', score: 100},
+        {id: 8, name: '卜卜', score: 100},
+        {id: 9, name: '邓邓', score: 80},
+        {id: 10, name: '恩恩', score: 80},
+        {id: 11, name: '白白', score: 75},
+        {id: 12, name: '邓邓', score: 70},
+        {id: 13, name: '方方', score: 100},
+        {id: 14, name: '卜卜', score: 100},
+        {id: 15, name: '邓邓', score: 80},
+        {id: 16, name: '恩恩', score: 80},
+        {id: 17, name: '白白', score: 75},
+        {id: 18, name: '邓邓', score: 70},
+        {id: 19, name: '白白', score: 75},
+        {id: 20, name: '邓邓', score: 70},
       ],
       selected: [],
       loading: false

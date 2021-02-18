@@ -1,6 +1,7 @@
 <template>
-  <div class="t-table-wrapper">
-    <table class="t-table" :class="{bordered, compact, striped: !striped}">
+  <div class="t-table-wrapper"  ref="wrapper">
+    <div :style="{height, overflow: 'auto'}">
+    <table class="t-table" :class="{bordered, compact, striped: !striped}" ref="table" >
       <thead>
       <tr>
         <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected"></th>
@@ -32,6 +33,7 @@
     <div class="t-table-loading" v-if="loading">
       <t-icon name="loading"></t-icon>
     </div>
+    </div>
   </div>
 </template>
 
@@ -54,6 +56,9 @@ export default {
       validator(array) {
         return array.filter(item => item.id === undefined).length > 0 ? false : true;
       }
+    },
+    height: {
+      type: [Number,String]
     },
     orderBy: {
       type: Object,
@@ -84,6 +89,19 @@ export default {
       default: () => []
     }
   },
+  mounted() {
+    let table2 = this.$refs.table.cloneNode(true);
+    this.table2 = table2
+    table2.classList.add('t-table-copy')
+    this.$refs.wrapper.appendChild(table2)
+    this.updateHeaderWidth()
+    this.onWindowResize = () => this.updateHeaderWidth()
+    window.addEventListener('resize', this.onWindowResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onWindowResize)
+    this.table2.remove()
+  },
   computed: {
     areAllItemsSelected() {
       let dataSourceSortedArray = this.dataSource.map(item => item.id).sort();
@@ -112,6 +130,22 @@ export default {
     }
   },
   methods: {
+    updateHeaderWidth() {
+      let table2 = this.table2
+      let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
+      let tableHeader2;
+      Array.from(table2.children).map(node => {
+        if (node.tagName.toLowerCase() !== 'thead') {
+          node.remove()
+        } else {
+          tableHeader2 = node
+        }
+      })
+      Array.from(tableHeader.children[0].children).map((th,i) => { // 这一行有问题
+        const {width} =  th.getBoundingClientRect()
+        tableHeader2.children[0].children[i].style.width = width + 'px'
+      })
+    },
     changeOrderBy(key) {
       const copy = JSON.parse(JSON.stringify(this.orderBy))
       let oldValue = copy[key]
@@ -135,7 +169,6 @@ export default {
       } else {
         copy.filter(i => i.id !== item.id);
       }
-      console.log(copy);
       this.$emit('update:selectedItems', copy);
     },
     onChangeAllItems(e) {
@@ -212,6 +245,7 @@ $gray: darken($gray, 30%);
   }
   &-wrapper {
     position: relative;
+    overflow: auto;
   }
   &-loading {
     background: rgba(255,255,255,0.8);
@@ -233,6 +267,13 @@ $gray: darken($gray, 30%);
     border-bottom: 1px solid $gray;
     text-align: left;
     padding: 8px;
+  }
+  &-copy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
   }
 }
 </style>
