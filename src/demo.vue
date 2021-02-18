@@ -74,12 +74,18 @@
       <div style="border: 1px solid gray; background: red">{{selected}}</div>
     </t-sticky>
     <div style="margin: 20px;">
-      <t-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"
-               :order-by.sync="orderBy" @update:orderBy="x" :loading="loading" height="400px"></t-table>
+      <t-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected" :striped="false"
+               :order-by.sync="orderBy" @update:orderBy="x" :loading="loading" :height="400" expend-field="description" checkable>
+        <template slot-scope="xxx">
+          <t-button @click="edit(xxx.item)" style="margin-right: 4px;">编辑</t-button>
+          <t-button @click="view(xxx.item)">查看</t-button>
+          <t-button>删除</t-button>
+        </template>
+      </t-table>
       <t-pager :total-page="20" :current-page.sync="currentPage" style="margin:20px; "></t-pager>
     </div>
     <div style="margin: 20px;">
-      <t-table :columns="columns" :data-source="dataSource"  compact :striped="false" :selected-items.sync="selected"></t-table>
+      <t-table :columns="columns" :data-source="dataSource2" bordered compact :striped="false"  :selected-items.sync="selected"></t-table>
       <t-pager :total-page="20" :current-page.sync="currentPage" style="margin:20px; "></t-pager>
     </div>
   </div>
@@ -94,6 +100,7 @@ import navItem from '@/nav/nav-item';
 import pager from '@/pager';
 import sticky from '@/sticky';
 import table from '@/table';
+import button from '@/button/button';
 // function ajax(parent_id = 0) {
 //   return new Promise((success, fail) => {
 //     let result = db.filter((item) => item.parent_id === parent_id);
@@ -120,23 +127,24 @@ export default {
     't-nav-item': navItem,
     't-pager': pager,
     't-sticky': sticky,
-    't-table': table
+    't-table': table,
+    't-button': button
   },
   data() {
     return {
       // selected: 'home',
       currentPage: 2,
       columns: [
-        {text: '姓名', field: 'name'},
-        {text: '分数', field: 'score'},
+        {text: '姓名', field: 'name', width: 100},
+        {text: '分数', field: 'score', width: 200},
       ],
       orderBy:{ // true -开启排序，但是不确定asc还是desc
         // name: 'asc',
         score: 'desc'
       },
       dataSource: [
-        {id: 1, name: '方方', score: 100},
-        {id: 2, name: '卜卜', score: 100},
+        {id: 1, name: '方方', score: 100, description: 'xxxxx'},
+        {id: 2, name: '卜卜', score: 100, description: 'xxxxx'},
         {id: 3, name: '邓邓', score: 80},
         {id: 4, name: '恩恩', score: 80},
         {id: 5, name: '白白', score: 75},
@@ -155,6 +163,11 @@ export default {
         {id: 18, name: '邓邓', score: 70},
         {id: 19, name: '白白', score: 75},
         {id: 20, name: '邓邓', score: 70},
+      ],
+      dataSource2: [
+        {id: 21, name: '方方', score: 100, description: 'xxxxx'},
+        {id: 22, name: '卜卜', score: 100, description: 'xxxxx'},
+        {id: 23, name: '邓邓', score: 80},
       ],
       selected: [],
       loading: false
@@ -180,6 +193,12 @@ export default {
     //     this.$set(lastLevelSelected, 'children', result);
     //   });
     // }
+    edit(item) {
+      console.log(item + '被点击了')
+    },
+    view(item) {
+      console.log(item + '被展示了');
+    },
     x() {
       this.loading = true
       // 前端不要做排序，排序方法切换的时候通知后端进行当前升降序处理切换排序

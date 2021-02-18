@@ -1,12 +1,15 @@
 <template>
   <div class="t-table-wrapper"  ref="wrapper">
-    <div :style="{height, overflow: 'auto'}">
+    <div :style="{height, overflow: 'auto'}" ref="tableWrapper">
     <table class="t-table" :class="{bordered, compact, striped: !striped}" ref="table" >
       <thead>
       <tr>
-        <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected"></th>
-        <th v-if="numberVisible">#</th>
-        <th v-for="column in columns" :key="column.field">
+        <th v-if="expendField" :style="{width: '50px'}" class="t-table-center">展示</th>
+        <th v-if="checkable" :style="{width: '50px'}" class="t-table-center">
+          <input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected">
+        </th>
+        <th v-if="numberVisible" :style="{width: '50px'}">#</th>
+        <th :style="{width: column.width + 'px'}" v-for="column in columns" :key="column.field">
           <div class="t-table-header">
           {{ column.text }}
           <span class="t-table-sorter" v-if="column.field in orderBy" @click="changeOrderBy(column.field)">
@@ -15,19 +18,35 @@
           </span>
           </div>
         </th>
+        <th ref="actionsHeader" v-if="$scopedSlots.default"></th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item,index) in dataSource" :key="item.id">
-        <td>
-          <input type="checkbox" @change="onChangeItem(item,index,$event)"
-                 :checked="inSelectedItems(item)">
-        </td>
-        <td v-if="numberVisible">{{ index }}</td>
-        <template v-for="column in columns">
-          <td :key="column.field">{{ item[column.field] }}</td>
-        </template>
-      </tr>
+      <template v-for="(item,index) in dataSource">
+        <tr :key="item.id">
+          <td :style="{width: '50px'}" class="t-table-center" v-if="expendField">
+            <t-icon name="right" class="t-table-expend-icon" @click="expendItem(item.id)"></t-icon>
+          </td>
+          <td v-if="checkable" :style="{width: '50px'}" class="t-table-center">
+            <input type="checkbox" @change="onChangeItem(item,index,$event)"
+                   :checked="inSelectedItems(item)">
+          </td>
+          <td :style="{width: '50px'}" v-if="numberVisible">{{ index+1 }}</td>
+          <template v-for="column in columns">
+            <td :style="{width: column.width + 'px'}" :key="column.field">{{ item[column.field] }}</td>
+          </template>
+          <td v-if="$scopedSlots.default">
+            <div ref="actions" style="display: inline-block;">
+              <slot :item="item"></slot>
+            </div>
+          </td>
+        </tr>
+        <tr v-if="inExpendIds(item.id)" :key="`${item.id}-expend`">
+          <td :colspan="columns.length + expendedCellColSpan">
+            {{item[expendField] || '空'}}
+          </td>
+        </tr>
+      </template>
       </tbody>
     </table>
     <div class="t-table-loading" v-if="loading">
@@ -45,6 +64,11 @@ export default {
   components: {
     't-icon': icon
   },
+  data() {
+    return {
+      expendedIds: []
+    }
+  },
   props: {
     columns: {
       type: Array,
@@ -57,8 +81,12 @@ export default {
         return array.filter(item => item.id === undefined).length > 0 ? false : true;
       }
     },
+    expendField: {
+      type: String,
+
+    },
     height: {
-      type: [Number,String]
+      type: Number
     },
     orderBy: {
       type: Object,
@@ -87,20 +115,41 @@ export default {
     selectedItems: {
       type: Array,
       default: () => []
+    },
+    checkable: { // 是否可以选中
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
-    let table2 = this.$refs.table.cloneNode(true);
+    let table2 = this.$refs.table.cloneNode(false);
     this.table2 = table2
     table2.classList.add('t-table-copy')
+    let thead = this.$refs.table.children[0]
+    let {height} = thead.getBoundingClientRect()
+    this.$refs.tableWrapper.style.marginTop = height + 'px'
+    this.$refs.tableWrapper.style.height = this.height - height + 'px'
+    table2.appendChild(thead)
     this.$refs.wrapper.appendChild(table2)
-    this.updateHeaderWidth()
-    this.onWindowResize = () => this.updateHeaderWidth()
-    window.addEventListener('resize', this.onWindowResize)
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.onWindowResize)
-    this.table2.remove()
+
+
+    if(this.$scopedSlots.default) {
+      let div = this.$refs.actions[0]
+      let {width} = div.getBoundingClientRect()
+      console.log(width);
+      let parent = div.parentNode
+      let styles = getComputedStyle(parent)
+      let paddingLeft = styles.getPropertyValue('padding-left')
+      let paddingRight = styles.getPropertyValue('padding-right')
+      let borderLeft = styles.getPropertyValue('border-left-width')
+      let borderRight = styles.getPropertyValue('border-right-width')
+      console.log(paddingLeft,paddingRight, borderLeft, borderRight);
+      let width2 = this.$refs.actionsHeader.style.width = width + parseInt(paddingLeft) + parseInt(paddingRight) + parseInt(borderLeft) + parseInt(borderRight) + 'px'
+      this.$refs.actionsHeader.style.width = width2
+      this.$refs.actions.map(div => {
+        div.parentNode.style.width = width2
+      })
+    }
   },
   computed: {
     areAllItemsSelected() {
@@ -116,6 +165,16 @@ export default {
         }
         return equal;
       }
+    },
+    expendedCellColSpan() {
+      let result = 0
+      if(this.checkable) {
+        result += 1
+      }
+      if(this.expendField) {
+        result += 1
+      }
+      return result
     }
   },
   watch: {
@@ -130,21 +189,15 @@ export default {
     }
   },
   methods: {
-    updateHeaderWidth() {
-      let table2 = this.table2
-      let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
-      let tableHeader2;
-      Array.from(table2.children).map(node => {
-        if (node.tagName.toLowerCase() !== 'thead') {
-          node.remove()
-        } else {
-          tableHeader2 = node
-        }
-      })
-      Array.from(tableHeader.children[0].children).map((th,i) => { // 这一行有问题
-        const {width} =  th.getBoundingClientRect()
-        tableHeader2.children[0].children[i].style.width = width + 'px'
-      })
+    inExpendIds(id) {
+      return this.expendedIds.indexOf(id) >= 0
+    },
+    expendItem(id) {
+      if(this.inExpendIds(id)) {
+        this.expendedIds.splice(this.expendedIds.indexOf(id), 1)
+      } else {
+        this.expendedIds.push(id)
+      }
     },
     changeOrderBy(key) {
       const copy = JSON.parse(JSON.stringify(this.orderBy))
@@ -189,7 +242,13 @@ $gray: darken($gray, 30%);
   border-collapse: collapse;
   border-spacing: 0;
   border-bottom: 1px solid $gray;
-
+  &-expend-icon {
+    width: 10px;
+    height: 10px;
+  }
+  & &-center {
+    text-align: center;
+  }
   &.compact {
     td, th {
       padding: 4px;
