@@ -88,6 +88,17 @@
       <t-table :columns="columns" :data-source="dataSource2" bordered compact :striped="false"  :selected-items.sync="selected"></t-table>
       <t-pager :total-page="20" :current-page.sync="currentPage" style="margin:20px; "></t-pager>
     </div>
+
+    <div>只能上传300kb以内的 png，jpeg文件</div>
+    {{error}}
+    <br>
+    <t-uploader action="http://127.0.0.1:3000/upload" name="file"
+                :parse-response="parseResponse" :file-list.sync="fileList"
+                @error="error=$event" :size-limit="1024*1024">
+        <t-button icon="upload">上传</t-button>
+      <!-- :fileList="fileList" @update:fileList="fileList = $event"  :fileList.sync="fileList" -->
+    </t-uploader>
+    <t-button>保存</t-button>
   </div>
 </template>
 
@@ -101,6 +112,7 @@ import pager from '@/pager';
 import sticky from '@/sticky';
 import table from '@/table';
 import button from '@/button/button';
+import uploader from '@/uploader';
 // function ajax(parent_id = 0) {
 //   return new Promise((success, fail) => {
 //     let result = db.filter((item) => item.parent_id === parent_id);
@@ -128,7 +140,8 @@ export default {
     't-pager': pager,
     't-sticky': sticky,
     't-table': table,
-    't-button': button
+    't-button': button,
+    't-uploader': uploader
   },
   data() {
     return {
@@ -170,7 +183,9 @@ export default {
         {id: 23, name: '邓邓', score: 80},
       ],
       selected: [],
-      loading: false
+      loading: false,
+      fileList: [],
+      error: ''
     };
   },
   mounted() {
@@ -209,7 +224,13 @@ export default {
         console.log('hi');
         this.loading = false
       },3000)
-    }
+    },
+    parseResponse(response) {
+      let object = JSON.parse(response)
+      console.log(object);
+      let url = `http://127.0.0.1:3000/preview/${object.id}`
+      return url
+    },
   },
 };
 </script>

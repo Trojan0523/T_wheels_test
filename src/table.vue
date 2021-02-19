@@ -136,14 +136,12 @@ export default {
     if(this.$scopedSlots.default) {
       let div = this.$refs.actions[0]
       let {width} = div.getBoundingClientRect()
-      console.log(width);
       let parent = div.parentNode
       let styles = getComputedStyle(parent)
       let paddingLeft = styles.getPropertyValue('padding-left')
       let paddingRight = styles.getPropertyValue('padding-right')
       let borderLeft = styles.getPropertyValue('border-left-width')
       let borderRight = styles.getPropertyValue('border-right-width')
-      console.log(paddingLeft,paddingRight, borderLeft, borderRight);
       let width2 = this.$refs.actionsHeader.style.width = width + parseInt(paddingLeft) + parseInt(paddingRight) + parseInt(borderLeft) + parseInt(borderRight) + 'px'
       this.$refs.actionsHeader.style.width = width2
       this.$refs.actions.map(div => {
