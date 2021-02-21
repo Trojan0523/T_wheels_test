@@ -16,11 +16,11 @@
 
 </template>
 <script>
-    import Tabs from '../../../src/tabs'
-    import TabsHead from "../../../src/tabs-head"
-    import TabsItem from "../../../src/tabs-item"
-    import TabsBody from "../../../src/tabs-body"
-    import TabsPane from "../../../src/tabs-pane"
+    import Tabs from '@/tabs/tabs'
+    import TabsHead from "@/tabs/tabs-head"
+    import TabsItem from "@/tabs/tabs-item"
+    import TabsBody from "@/tabs/tabs-body"
+    import TabsPane from "@/tabs/tabs-pane"
     export default {
         components:{
             't-tabs': Tabs,
